@@ -7,7 +7,7 @@ Enemy.o: Enemy.cpp Enemy.h
 Bullet.o: Bullet.cpp Bullet.h
 	g++ -c Bullet.cpp
 
-game.o: game.cpp game.h Player.h Enemy.h
+game.o: game.cpp game.h Player.cpp Player.h Enemy.cpp Enemy.h Bullet.cpp Bullet.h
 	g++ -c game.cpp
 
 main.o: main.cpp game.h

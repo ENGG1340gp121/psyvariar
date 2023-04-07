@@ -14,7 +14,7 @@ game::game(int _TIME_OUT, int _MIN_ENEMIES){
     LX = 1, RY = COLS - 2;
     LY = 1, RX = LINES - 2;
     win = stdscr;
-    player = Player(1, 1, 1, 1, '#');
+    player = Player(0, 1, 1, LX, LY, RX, RY, 0, '#');
 }
 void game::clear_hit_item(){
     vector<Enemy> alive_enemies;
