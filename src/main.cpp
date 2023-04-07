@@ -1,5 +1,5 @@
-#include <curses.h>
 #include <bits/stdc++.h>
+#include <curses.h>
 #include "game.h"
 using namespace std;
 int main(){

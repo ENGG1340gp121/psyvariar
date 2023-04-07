@@ -1,14 +1,22 @@
 Player.o: Player.cpp Player.h
-	g++ -c Player.cpp -lncurses
+	g++ -c Player.cpp
 
 Enemy.o: Enemy.cpp Enemy.h
-	g++ -c Enemy.cpp -lncurses
+	g++ -c Enemy.cpp
+
+Bullet.o: Bullet.cpp Bullet.h
+	g++ -c Bullet.cpp
 
 game.o: game.cpp game.h Player.h Enemy.h
-	g++ -c game.cpp -lncurses
+	g++ -c game.cpp
 
 main.o: main.cpp game.h
-	g++ -c main.cpp -lncurses
+	g++ -c main.cpp
 
-main: main.o game.o Player.o Enemy.o
-	g++ -lncurses main.o game.o Player.o Enemy.o -o main
+main: main.o game.o Player.o Enemy.o Bullet.o
+	g++ main.o game.o Player.o Enemy.o Bullet.o -o main -lcurses
+
+clean:
+	rm -f *.o main
+
+.PHONY: clean

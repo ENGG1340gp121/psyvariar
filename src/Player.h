@@ -1,5 +1,5 @@
 #include <bits/stdc++.h>
-#include <ncurses.h>
+#include <curses.h>
 using namespace std;
 class Player{
     public:
