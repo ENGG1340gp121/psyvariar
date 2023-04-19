@@ -11,7 +11,7 @@ int main(){
 		//author
 	//Loading_End()
 
-	game g(1, 20, 100);
+	game g(0, 30, 100);
 	g.play();
 	return 0;
 

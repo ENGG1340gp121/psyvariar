@@ -14,8 +14,8 @@ game::game(int difficulty, int X_size,int Y_size){
     cbreak();
     timeout(TIME_OUT);
     keypad(stdscr, TRUE);
-    LX = 1, RY = COLS - 2;
-    LY = 1, RX = LINES - 2;
+    LX = 1, RY = Y_size - 2;
+    LY = 1, RX = X_size - 2;
     win = stdscr;
     player = Player(LX, LY, RX, RY, 0, 1, 1, 1);
     enemies = Enemies(difficulty, LX, LY, RX, RY);
@@ -64,9 +64,24 @@ void game::play(){
     }
     endwin();
 }
+void game::draw_border() {
+    mvwaddch(win, LX - 1, LY - 1, '+');
+    mvwaddch(win, LX - 1, RY + 1, '+');
+    mvwaddch(win, RX + 1, LY - 1, '+');
+    mvwaddch(win, RX + 1, RY + 1, '+');
+    for(int i = LX; i <= RX; i++) {
+        mvwaddch(win, i, RY + 1, '|');
+        mvwaddch(win, i, LY - 1, '|');
+    }
+    for(int i = LY; i <= RY; i++) {
+        mvwaddch(win, RX + 1, i, '-');
+        mvwaddch(win, LX - 1, i, '-');
+    }
+}
+
 void game::display() {
     werase(win);
-    wborder(win, '|', '|', '-', '-', '+', '+', '+', '+');
+    draw_border();
     player.draw(win);
     enemies.draw(win);
     
