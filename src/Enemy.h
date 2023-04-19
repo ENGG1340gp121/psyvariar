@@ -14,7 +14,6 @@ class Enemy {
         };
         int LX, LY, RX, RY;
         int x, y, HP, level;
-        char sym;
         vector<Enemy_char> Enemy_figure[3];
         Enemy();
         Enemy(int _x, int _y, int _level, int _LX, int _LY, int _RX, int _RY);
@@ -22,6 +21,6 @@ class Enemy {
         bool alive();
         void move();
         void draw(WINDOW* win);
-
+        void decrease_HP(int x);
     private:
 };
