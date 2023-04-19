@@ -12,7 +12,7 @@ class game{
         Player player;
         Enemies enemies;
         game();
-        game(int _TIME_OUT, int _MIN_ENEMIES);
+        game(int difficulty, int X_size,int Y_size);
         void play();
         void all_move();
     	void display();

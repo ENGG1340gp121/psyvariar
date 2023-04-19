@@ -1,6 +1,7 @@
 #include <bits/stdc++.h>
 #include <curses.h>
 using namespace std;
+#pragma once
 class Bullet{
 	public:
         int LX, LY, RX, RY, x, y, clock;

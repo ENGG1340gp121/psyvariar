@@ -3,8 +3,9 @@
 #include "Enemies.h"
 
 Enemies::Enemies(){}
-Enemies::Enemies(int _LX, int _LY, int _RX, int _RY){
+Enemies::Enemies(int _difficulty, int _LX, int _LY, int _RX, int _RY){
 	LX = _LX, LY = _LY, RX = _RX, RY = _RY;
+    difficulty = _difficulty;
 }
 
 void Enemies::add_enemy(Enemy tmp){
@@ -44,4 +45,8 @@ void Enemies::add(int MIN_ENEMIES) {
     while(int(enemies.size()) < MIN_ENEMIES) {
         enemies.push_back(generate_enemy());
     }
+}
+
+bool Enemies::hit(int bx, int by) {
+
 }

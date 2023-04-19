@@ -1,6 +1,6 @@
 #include <bits/stdc++.h>
 #include <curses.h>
-
+#pragma once
 using namespace std;
 
 class Enemy {
