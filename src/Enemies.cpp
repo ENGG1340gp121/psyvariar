@@ -21,7 +21,7 @@ void Enemies::clear_enemy(){
 }
 
 void Enemies::draw(WINDOW* win){
-    for(Enemy& e: enemies) if(e.is_inside()) {
+    for(Enemy& e: enemies) {
         e.draw(win);
     }
 }

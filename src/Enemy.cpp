@@ -17,18 +17,14 @@ Enemy::Enemy(int _x, int _y, int _level, int _LX, int _LY, int _RX, int _RY){
     LX = _LX, LY = _LY, RX = _RX, RY = _RY;
 	HP = 1;
 }
-bool Enemy::is_inside(){
-    for(Enemy_char& c : Enemy_figure[level]){
-        int X = x + c.x, Y = y + c.y;
-        if(X < LX || X > RX || Y < LY || Y > RY) return 0;
-    }
-    return 1;
-}
-
 bool Enemy::alive() {
     if(HP <= 0) return false;
-    if(y < LY) return false;
-    return true;
+    for(Enemy_char& c : Enemy_figure[level]){
+        int X = x + c.x, Y = y + c.y;
+        if(Y >= LY && LX <= X && X <= RX)
+            return true;
+    }
+    return false;
 }
 
 void Enemy::move(){

@@ -12,9 +12,6 @@ class Enemy {
                 sym = _sym, x = _x, y = _y;
             }
         };
-        int LX, LY, RX, RY;
-        int x, y, HP, level;
-        vector<Enemy_char> Enemy_figure[3];
         Enemy();
         Enemy(int _x, int _y, int _level, int _LX, int _LY, int _RX, int _RY);
         bool is_inside();
@@ -23,4 +20,7 @@ class Enemy {
         void draw(WINDOW* win);
         void decrease_HP(int x);
     private:
+        int LX, LY, RX, RY;
+        int x, y, HP, level;
+        vector<Enemy_char> Enemy_figure[3];
 };
