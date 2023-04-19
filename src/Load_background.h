@@ -1,7 +1,7 @@
 #include <bits/stdc++.h>
 #include <curses.h>
 #include <unistd.h>
-
+#pragma once
 using namespace std;
 
 class load_background{
