@@ -1,37 +1,98 @@
 #include <bits/stdc++.h>
 #include <ncurses.h>
 #include "Player.h"
+#include "Bullet.h"
 using namespace std;
-Player::Player(){}
-Player::Player(int _LX, int _LY, int _RX, int _RY){
-    LX = _LX, LY = _LY, RX = _RX, RY = _RY;
-    HP = 0, x = 0, y = 0, weapon = 0, sym = '#';
+Player::Player(){
+
 }
-Player::Player(int _HP, int _x, int _y, int _LX, int _LY, int _RX, int _RY , int _weapon, char _sym){
-    LX = _LX, LY = _LY, RX = _RX, RY = _RY;
-    HP = _HP, x = _x, y = _y, weapon = _weapon, sym = _sym;
+Player::Player(int _LX, int _LY, int _RX, int _RY, int _Level, int _HP, int _x, int _y){
+    Plane[0].push_back(plane_char('>', 0, 0));
+    Plane[0].push_back(plane_char('=', 0, 1));
+    Plane[0].push_back(plane_char('-', 0, 2));
+    Plane[0].push_back(plane_char(')', 1, 1));
+    Plane[0].push_back(plane_char('+', 1, 2));
+    Plane[0].push_back(plane_char('=', 1, 3));
+    Plane[0].push_back(plane_char('>', 1, 4));
+    Plane[0].push_back(plane_char('>', 2, 0));
+    Plane[0].push_back(plane_char('=', 2, 1));
+    Plane[0].push_back(plane_char('-', 2, 2));
+    Gun[0].push_back(plane_char('-', 0, 2));
+    Gun[0].push_back(plane_char('-', 2, 2));
+    LX = _LX, LY = _LY, RX = _RX, RY = _RY, Level = _Level, HP = _HP, x = _x, y = _y;
 }
-void Player::keep_inside(){
-    x = max(x, LX), x = min(x, RX);
-    y = max(y, LY), y = min(y, RY);
+bool Player::check_inside(){
+    for(plane_char& c : Plane[Level]){
+        int X = x + c.x, Y = y + c.y;
+        if(X > RX || X < LX || Y > RY || Y < LX) return 0;
+    }
+    return 1;
 }
 void Player::move_left(){
-    y--;
-    keep_inside();
+    for(plane_char& c : Plane[Level]){
+        c.y--;
+    }
+    if (!check_inside()){
+        for(plane_char& c : Plane[Level]){
+            c.y++;
+        }
+    }
 }
 void Player::move_right(){
-    y++;
-    keep_inside();
+    for(plane_char& c : Plane[Level]){
+        c.y++;
+    }
+    if (!check_inside()){
+        for(plane_char& c : Plane[Level]){
+            c.y--;
+        }
+    }
 }
 void Player::move_down(){
-    x++;
-    keep_inside();
+/*
+    for(plane_char& c : Plane[Level]){
+        c.x++;
+    }*/
+	x++;
+    if (!check_inside()){
+    /*    for(plane_char& c : Plane[Level]){
+            c.x--;
+        }*/
+		x--;
+    }
+	
 }
 void Player::move_up(){
-    x--;
-    keep_inside();
+    for(plane_char& c : Plane[Level]){
+        c.x--;
+    }
+    if (!check_inside()){
+        for(plane_char& c : Plane[Level]){
+            c.x++;
+        }
+    }
 }
-
+void Player::move(int c){
+    if(c == KEY_LEFT){
+		Player::move_left();
+	}
+    else if(c == KEY_RIGHT){
+        Player::move_right();
+	}
+    else if(c == KEY_UP){
+		Player::move_up();
+	}
+    else if(c == KEY_DOWN) {
+		Player::move_down();
+	}
+}
 void Player::draw(WINDOW* win){
-    mvwaddch(win, x, y, sym);
+    for(plane_char& c : Plane[Level]){
+        mvwaddch(win, x+c.x, y+c.y, c.sym);
+    }
+}
+void Player::shoot(){
+    for(plane_char& c : Gun[Level]){
+        Bullets.push_back(Bullet(x+c.x, y+c.y, LX, LY, RX, RY, '-'));
+    }
 }

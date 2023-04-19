@@ -10,8 +10,8 @@ int main(){
 		//ranking table
 		//author
 	//Loading_End()
-	printf("ahahahs");
-	game g(20, 20);
+
+	game g(1, 20, 100);
 	g.play();
 	return 0;
 

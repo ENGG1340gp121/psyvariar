@@ -1,12 +1,22 @@
 #include <bits/stdc++.h>
 #include <curses.h>
+#include "Enemy.h"
+#include <random>
+#pragma once
 
 class Enemies {
     public:
-        Enemies(int _LX, int _LY, int _RX, int _RY);
+        Enemies();
+        Enemies(int _difficulty, int _LX, int _LY, int _RX, int _RY);
         void draw(WINDOW* win);
-        void add_enemy(int x, int y, char sym);
+        void add_enemy(Enemy tmp);
+        void move();
+        void add(int MIN_ENEMIES);
+        bool hit(int bx, int by);
     private:
-        int LX, LY, RX, RY;
+        mt19937 rng;
+        int LX, LY, RX, RY, difficulty;
         vector<Enemy> enemies;
+        Enemy generate_enemy();
+        void clear_enemy();
 };

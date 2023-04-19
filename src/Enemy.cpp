@@ -4,20 +4,39 @@
 
 using namespace std;
 
-Enemy::Enemy(int _x, int _y, int _LX, int _LY, int _RX, int _RY, char _sym){
+Enemy::Enemy(){
+
+}
+Enemy::Enemy(int _x, int _y, int _level, int _LX, int _LY, int _RX, int _RY){
+    Enemy_figure[0].push_back(Enemy_char('<', 0, 2));
+    Enemy_figure[0].push_back(Enemy_char('<', 1, 0));
+    Enemy_figure[0].push_back(Enemy_char('=', 1, 1));
+    Enemy_figure[0].push_back(Enemy_char('(', 1, 2));
+    Enemy_figure[0].push_back(Enemy_char('<', 2, 2));
+    x = _x, y = _y, level = _level;
     LX = _LX, LY = _LY, RX = _RX, RY = _RY;
-    x = _x, y = _y;
-    sym = _sym;
+	HP = 1;
 }
-bool Enemy::is_inside(){
-    return LX <= x && x <= RX && LY <= y && y <= RY;
+bool Enemy::alive() {
+    if(HP <= 0) return false;
+    for(Enemy_char& c : Enemy_figure[level]){
+        int X = x + c.x, Y = y + c.y;
+        if(Y >= LY && LX <= X && X <= RX)
+            return true;
+    }
+    return false;
 }
-bool Enemy::alive(){
-    return y >= LY;
-}
+
 void Enemy::move(){
-    y--;
+	y--;
 }
 void Enemy::draw(WINDOW* win){
-    mvwaddch(win, x, y, sym);
+    for(Enemy_char& c : Enemy_figure[level]){
+        int X = x + c.x, Y = y + c.y;
+        if(X < LX || X > RX || Y < LY || Y > RY) continue;
+        mvwaddch(win, X, Y, c.sym);
+    }
+}
+void Enemy::decrease_HP(int x) {
+    HP -= x;
 }
