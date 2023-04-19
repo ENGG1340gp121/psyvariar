@@ -5,14 +5,15 @@ using namespace std;
 game::game(){
 
 }
-game::game(int _TIME_OUT, int _MIN_ENEMIES){
-    TIME_OUT = _TIME_OUT, MIN_ENEMIES = _MIN_ENEMIES;
+game::game(int difficulty, int X_size,int Y_size){
+    enemies = Enemies(difficulty, X_size, Y_size);
+    obstacles = Obstacles(X_size, Y_size);
     initscr();
     cbreak();
     timeout(TIME_OUT);
     keypad(stdscr, TRUE);
-    LX = 1, RY = COLS - 2;
-    LY = 1, RX = LINES - 2;
+    LX = 1, RY = X_size - 2;
+    LY = 1, RX = Y_size - 2;
     win = stdscr;
     player = Player(0, 1, 1, LX, LY, RX, RY, 0, '#');
 }
@@ -34,7 +35,7 @@ void game::clear_hit_item(){
 
     for(Bullet& bullet : bullets){
         bool alive_flag = 1;
-        for(Enemy& enemy : enemies){   
+        for(Enemy& enemy : enemies){
             if (enemy.x == bullet.x && enemy.y == bullet.y){
                 alive_flag = 0;
                 break;
@@ -72,38 +73,24 @@ void game::check_hit(){
 void game::play(){
     int c;
     while((c = getch()) != KEY_F(1)){
-        
-        if(c == KEY_LEFT){
-            player.move_left();
-        }
-        else if(c == KEY_RIGHT){
-            player.move_right();
-        }
-        else if(c == KEY_UP){
-            player.move_up();
-        }
-        else if(c == KEY_DOWN){
-            player.move_down();
-        }
-        else if(c == ' '){
+        if (c == ' '){
+            bullets
             bullets.push_back(Bullet(player.x, player.y, LX, LY, RX, RY, '-'));
         }
+        else if (c == 'f'){
+            bullets
+        }
+        else if (c == 'q'){
 
+        }
+        else player.move(c);
+        bullets.move();
         check_hit();
-
-        while(int(enemies.size()) < MIN_ENEMIES){
-            enemies.push_back(Enemy(rand() % RX + 1, RY + rand() % RY, LX, LY, RX, RY, '@'));
-        }
-
-        bool hit = false;
-        for(Enemy& enemy : enemies){
-            if(enemy.x == player.x && enemy.y == player.y) {
-                hit = true;
-                break;
-            }
-        }
-        if(hit) break;
-        
+        enemies.move();
+        check_hit();
+        enemies.add(MIN_ENEMIES);
+        if (!player.check_alive())
+            break;
         display();
     }
     endwin();
@@ -112,15 +99,7 @@ void game::display() {
     werase(win);
     wborder(win, '|', '|', '-', '-', '+', '+', '+', '+');
     player.draw(win);
-    for(Enemy& enemy : enemies){
-        if(enemy.is_inside()){
-            enemy.draw(win);
-        }
-    }
-    for(Bullet& bullet : bullets){
-        if(bullet.is_inside()){
-            bullet.draw(win);
-        }
-    }
+    enemies.draw(win);
+    bullets.draw(win);
     wrefresh(win);
 }
