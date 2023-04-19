@@ -1,7 +1,7 @@
 #include <bits/stdc++.h>
 #include <curses.h>
 #include "Player.h"
-#include "Enemy.h"
+#include "Enemies.h"
 #include "Bullet.h"
 using namespace std;
 class game{
@@ -10,12 +10,11 @@ class game{
         int TIME_OUT, MIN_ENEMIES;
         int LX, LY, RX, RY;
         Player player;
-        vector<Enemy> enemies;
+        Enemies enemies;
         game();
         game(int _TIME_OUT, int _MIN_ENEMIES);
         void play();
-        void clear_hit_item();
-        void check_hit();
+        void all_move();
     	void display();
     private:
 };

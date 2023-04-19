@@ -11,9 +11,6 @@ Bullet::Bullet(int _x, int _y, int _LX, int _LY, int _RX, int _RY, char _sym){
 bool Bullet::is_inside(){
     return LX <= x && x <= RX && LY <= y && y <= RY;
 }
-bool Bullet::alive(){
-    return y >= LY;
-}
 void Bullet::move(){
     if(++clock == CLK){
         clock = 0;
