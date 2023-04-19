@@ -1,18 +1,24 @@
 #include <bits/stdc++.h>
 #include <curses.h>
 #include "Enemies.h"
-Enemies::Enemies(int _LX, int _LY, int _RX, int _RY){
-    LX = _LX, LY = _LY, RX = _RX, RY = _RY;
+
+Enemies::Enemies(){}
+
+void Enemies::add_enemy(Enemy tmp){
+    enemies.push_back(tmp);
 }
 
-void Enemies::add_enemy(int x, int y, char sym) {
-    enemies.emplace_back(x, y, LX, LY, RX, RY, sym);
+void Enemies::clear_enemy(){
+    vector<Enemy> new_enemies;
+    for(Enemy e : enemies){
+        if(e.is_inside())
+            new_enemies.push_back(e);
+    }
+    swap(new_enemies, enemies);
 }
 
-void Enemies::draw(WINDOW* win) {
-    for(Enemy e:enemies) {
-        if(e.is_inside()) {
+void Enemies::draw(WINDOW* win){
+    for(Enemy e : enemies){
             e.draw(win);
-        }
     }
 }

@@ -1,11 +1,12 @@
 #include <bits/stdc++.h>
 #include <curses.h>
-
+#include "Enemy.h"
 class Enemies {
     public:
-        Enemies(int _LX, int _LY, int _RX, int _RY);
+        Enemies();
         void draw(WINDOW* win);
-        void add_enemy(int x, int y, char sym);
+        void add_enemy(Enemy tmp);
+        void clear_enemy();
     private:
         int LX, LY, RX, RY;
         vector<Enemy> enemies;

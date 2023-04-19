@@ -11,7 +11,6 @@ class game{
         int LX, LY, RX, RY;
         Player player;
         vector<Enemy> enemies;
-        vector<Bullet> bullets;
         game();
         game(int _TIME_OUT, int _MIN_ENEMIES);
         void play();

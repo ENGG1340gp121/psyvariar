@@ -68,23 +68,23 @@ void game::check_hit(){
     swap(enemies, alive_enemies);
     alive_enemies.clear();
     clear_hit_item();
-
 }
 void game::play(){
     int c;
     while((c = getch()) != KEY_F(1)){
         if (c == ' '){
-            bullets
-            bullets.push_back(Bullet(player.x, player.y, LX, LY, RX, RY, '-'));
+            player.shoot();
         }
         else if (c == 'f'){
-            bullets
+            continue;
         }
         else if (c == 'q'){
-
+            break;
         }
         else player.move(c);
-        bullets.move();
+        for(Bullet& b : player.Bullets){
+            b.move();
+        }
         check_hit();
         enemies.move();
         check_hit();
