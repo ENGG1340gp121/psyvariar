@@ -11,10 +11,11 @@ Bullet::Bullet(int _x, int _y, int _LX, int _LY, int _RX, int _RY, char _sym){
 bool Bullet::is_inside(){
     return LX <= x && x <= RX && LY <= y && y <= RY;
 }
-void Bullet::move(){
-    if(++clock == CLK){
+void Bullet::move(int velocity, int direction){
+    clock++;
+    if(clock >= velocity){
         clock = 0;
-        y++;
+        y+=direction;
     }
 }
 void Bullet::draw(WINDOW* win){

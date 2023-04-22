@@ -15,6 +15,7 @@ class Player{
         };
         int HP, Level, weapon, x, y;
         int LX, LY, RX, RY;
+        int atk[2];
         vector<plane_char> Plane[2];
         vector<plane_char> Gun[2];
         vector<Bullet> Bullets;
@@ -27,6 +28,7 @@ class Player{
         void move_down();
         void move_up();
         void shoot();
+        void get_damage(int value);
         void draw(WINDOW* win);
     private:
 };

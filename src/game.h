@@ -17,5 +17,6 @@ class game{
         void all_move();
     	void display();
         void draw_border();
+        void check_player_damage();
     private:
 };

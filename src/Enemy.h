@@ -1,5 +1,6 @@
 #include <bits/stdc++.h>
 #include <curses.h>
+#include "Bullet.h"
 #pragma once
 using namespace std;
 
@@ -13,14 +14,17 @@ class Enemy {
             }
         };
         Enemy();
-        Enemy(int _x, int _y, int _level, int _LX, int _LY, int _RX, int _RY);
+        Enemy(int _x, int _y, int HP, int _level, int _LX, int _LY, int _RX, int _RY);
         bool is_inside();
         bool alive();
-        void move();
+        void move(int velocity);
         void draw(WINDOW* win);
         void decrease_HP(int x);
-    private:
+        void shoot(int velocity);
         int LX, LY, RX, RY;
-        int x, y, HP, level;
+        int x, y, HP, level, clock_shoot, clock;
         vector<Enemy_char> Enemy_figure[3];
+        vector<Enemy_char> Gun[3];
+        vector<Bullet> bullets;
+    private:
 };
