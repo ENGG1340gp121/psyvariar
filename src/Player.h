@@ -2,6 +2,7 @@
 #include <curses.h>
 #include "Bullet.h"
 using namespace std;
+#pragma once
 class Player{
     public:
         struct plane_char{

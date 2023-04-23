@@ -14,14 +14,14 @@ class Enemy {
             }
         };
         Enemy();
-        Enemy(int _x, int _y, int HP, int _level, int _LX, int _LY, int _RX, int _RY);
+        Enemy(int _difficulty, int _x, int _y, int HP, int _level, int _LX, int _LY, int _RX, int _RY);
         bool is_inside();
         bool alive();
         void move(int velocity);
         void draw(WINDOW* win);
         void decrease_HP(int x);
         void shoot(int velocity);
-        int LX, LY, RX, RY;
+        int LX, LY, RX, RY, difficulty;
         int x, y, HP, level, clock_shoot, clock;
         vector<Enemy_char> Enemy_figure[3];
         vector<Enemy_char> Gun[3];

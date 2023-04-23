@@ -3,13 +3,14 @@
 #include "game.h"
 #include "Enemies.h"
 #include "Bullet.h"
+#include "Board.h"
 #define INF 1000000
 using namespace std;
 game::game(){
 
 }
 game::game(int difficulty, int X_size,int Y_size){
-	TIME_OUT = 50;
+	TIME_OUT = 20;
 	MIN_ENEMIES = 10;
     initscr();
     cbreak();
@@ -25,9 +26,8 @@ game::game(int difficulty, int X_size,int Y_size){
 
 void game::all_move(){
     
-    for(Enemy& e : enemies.enemies){
-        e.shoot(40);
-    }
+    enemies.shoot(40);
+    
     for(Enemy& e : enemies.enemies){
         for(Bullet& b : e.bullets){
             b.move(1, -1);
@@ -99,6 +99,8 @@ void game::play(){
     }
     endwin();
 }
+
+// Draw the border of the frame
 void game::draw_border() {
     mvwaddch(win, LX - 1, LY - 1, '+');
     mvwaddch(win, LX - 1, RY + 1, '+');

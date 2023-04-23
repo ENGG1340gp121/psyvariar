@@ -19,5 +19,7 @@ void Bullet::move(int velocity, int direction){
     }
 }
 void Bullet::draw(WINDOW* win){
-    mvwaddch(win, x, y, sym);
+    if(is_inside()) {
+        mvwaddch(win, x, y, sym);
+    }
 }

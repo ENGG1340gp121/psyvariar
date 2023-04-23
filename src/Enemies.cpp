@@ -13,6 +13,7 @@ void Enemies::add_enemy(Enemy tmp){
     enemies.push_back(tmp);
 }
 
+// Remove all dead enemies
 void Enemies::clear_enemy(){
     vector<Enemy> new_enemies;
     for(Enemy& e : enemies) {
@@ -22,15 +23,14 @@ void Enemies::clear_enemy(){
     swap(new_enemies, enemies);
 }
 
+// Draw all enemies
 void Enemies::draw(WINDOW* win){
     for(Enemy& e: Enemies::enemies){
-        for(Bullet b : e.bullets){
-            b.draw(win);
-        }
         e.draw(win);
     }
 }
 
+// Update the positions of all enemies and remove dead ones
 void Enemies::move() {
     for(Enemy& e : enemies) {
         e.move(5);
@@ -38,19 +38,23 @@ void Enemies::move() {
     clear_enemy();
 }
 
+// Generate an enemy thet is that is to the right of the frame
 Enemy Enemies::generate_enemy() {
     int x = rng() % (RX - LX + 1) + LX;
     int y = rng() % (RY - LY + 1) + RY + 1;
     int level = 0;
-    return Enemy(x, y, level, LX, LY, RX, RY, 5);
+    return Enemy(difficulty, x, y, level, LX, LY, RX, RY, 5);
 }
 
+// Add new enemies until there are at least MIN_ENEMIES eneimes
 void Enemies::add(int MIN_ENEMIES) {
     while(int(enemies.size()) < MIN_ENEMIES) {
         enemies.push_back(generate_enemy());
     }
 }
 
+// Update the enemies and bullets if they are hit by a bullet (bx, by) that can do "atk" damages
+// Returns whether the bullet hits somehting
 bool Enemies::hit(int bx, int by, int atk) {
     bool hit_flag = 0;
     for(Enemy& e : enemies){
@@ -71,4 +75,10 @@ bool Enemies::hit(int bx, int by, int atk) {
         swap(bullet_alive, e.bullets);
     }
     return hit_flag;
+}
+
+void Enemies::shoot(int velocity) {
+    for(Enemy& e : enemies) {
+        e.shoot(velocity);
+    }
 }
