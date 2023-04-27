@@ -1,4 +1,8 @@
-#include <bits/stdc++.h>
+#include <iostream>
+#include <vector>
+#include <string>
+#include <cstring>
+#include <algorithm>
 #include <curses.h>
 #include <unistd.h>
 #include "Load_background.h"

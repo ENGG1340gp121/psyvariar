@@ -1,4 +1,7 @@
-#include <bits/stdc++.h>
+#include <iostream>
+#include <vector>
+#include <string>
+#include <algorithm>
 #include <ncurses.h>
 #include "Player.h"
 #include "Bullet.h"
@@ -22,6 +25,7 @@ Player::Player(int _LX, int _LY, int _RX, int _RY, int _Level, int _HP, int _x, 
     atk[0] = 1;
     MAX_HEAT[0]=5;
     LX = _LX, LY = _LY, RX = _RX, RY = _RY, Level = _Level, HP = _HP, x = _x, y = _y;
+    gun_heat = 0;
 }
 bool Player::check_inside(){
     for(plane_char& c : Plane[Level]){
@@ -109,10 +113,20 @@ bool Player::shoot(){
     for(plane_char& c : Gun[Level]){
         Bullets.push_back(Bullet(x+c.x, y+c.y, LX, LY, RX, RY, '-'));
     }
+    return 1;
 }
 void Player::get_damage(int value){
     HP -= value;
 }
 void Player::gun_heat_annealing(){
     gun_heat--;
+    gun_heat = max(gun_heat, 0);
+}
+
+vector<pair<int, int>> Player::get_positions() {
+    vector<pair<int, int>> ret;
+    for(plane_char& t : Plane[Level]){
+        ret.emplace_back(x + t.x, y + t.y);
+    }
+    return ret;
 }

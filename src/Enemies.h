@@ -1,4 +1,7 @@
-#include <bits/stdc++.h>
+#include <iostream>
+#include <vector>
+#include <string>
+#include <algorithm>
 #include <curses.h>
 #include "Enemy.h"
 #include <random>
@@ -19,5 +22,6 @@ class Enemies {
         vector<Enemy> enemies;
         Enemy generate_enemy();
         void clear_enemy();
+        vector<pair<int, int>> get_positions();
     private:
 };

@@ -1,4 +1,7 @@
-#include <bits/stdc++.h>
+#include <iostream>
+#include <vector>
+#include <string>
+#include <algorithm>
 #include <curses.h>
 #include "Bullet.h"
 using namespace std;
@@ -34,5 +37,6 @@ class Player{
         void get_damage(int value);
         void draw(WINDOW* win);
         void gun_heat_annealing();
+        vector<pair<int, int>> get_positions();
     private:
 };

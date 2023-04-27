@@ -1,4 +1,7 @@
-#include <bits/stdc++.h>
+#include <iostream>
+#include <vector>
+#include <string>
+#include <algorithm>
 #include <curses.h>
 #include "Enemy.h"
 
@@ -77,4 +80,12 @@ void Enemy::shoot(int velocity){
             bullets.push_back(Bullet(x + gun.x, y + gun.y, LX, LY, RX, RY, '*'));
         }
     }
+}
+
+vector<pair<int, int>> Enemy::get_positions() {
+    vector<pair<int, int>> ret;
+    for(Enemy_char& t : Enemy_figure[level]){
+        ret.emplace_back(x + t.x, y + t.y);
+    }
+    return ret;
 }

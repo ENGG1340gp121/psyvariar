@@ -1,9 +1,13 @@
-#include <bits/stdc++.h>
+#include <iostream>
+#include <vector>
+#include <string>
+#include <algorithm>
 #include <curses.h>
 #include "Player.h"
 #include "Enemies.h"
 #include "Bullet.h"
 #include "Board.h"
+#include "Obstacles.h"
 using namespace std;
 class game{
     public:
@@ -15,6 +19,7 @@ class game{
         int LX, LY, RX, RY;
         Player player;
         Enemies enemies;
+        Obstacles obstacles;
         Board b;
         game();
         game(int difficulty, int X_size,int Y_size);
