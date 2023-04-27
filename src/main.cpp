@@ -3,9 +3,9 @@
 #include "game.h"
 #include "Load_background.h"
 using namespace std;
-int main(){
+int main(int argc, char *argv[]){
 	load_background load;
-	load.play();
+	if(argc == 1) load.play();
 	//Menu::menu()
 	game g(0, 30, 100);
 	g.play();

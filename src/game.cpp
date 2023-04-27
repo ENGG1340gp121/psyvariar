@@ -12,7 +12,7 @@ game::game(){
 }
 game::game(int difficulty, int X_size,int Y_size){
 	TIME_OUT = 20;
-	MIN_ENEMIES = 10;
+	MIN_ENEMIES = 8;
     initscr();
     cbreak();
     timeout(TIME_OUT);
@@ -95,14 +95,12 @@ void game::all_move(){
     alive_bullets.clear();
 }
 void game::check_player_damage(){
-    bool hit_flag_crash = 0;
+    vector<pair<int, int>> p_pos = player.get_positions();
+    vector<pair<int, int>> e_pos = enemies.get_positions();
+    vector<pair<int, int>> o_pos = obstacles.get_positions();
+
     for(Enemy& e : enemies.enemies){
         for(Player::plane_char& p : player.Plane[player.Level]){
-            for(Enemy::Enemy_char& t : e.Enemy_figure[e.level]){
-                if(e.x + t.x == player.x + p.x && e.y +  t.y == player.y + p.y){
-                    hit_flag_crash = 1;
-                }
-            }
             vector<Bullet> tmp;
             for(Bullet& b : e.bullets){
                 if(b.x == player.x + p.x && b.y == player.y + p.y){
@@ -114,16 +112,26 @@ void game::check_player_damage(){
             swap(tmp, e.bullets);
         }
     }
-    for(Obstacle& e : obstacles.obstacles){
-        for(Player::plane_char& p : player.Plane[player.Level]){
-            for(Obstacle::Obstacle_char& t : e.Obstacle_figure[e.level]){
-                if(e.x + t.x == player.x + p.x && e.y +  t.y == player.y + p.y){
-                    hit_flag_crash = 1;
-                }
-            }
+
+    auto crash = [] (vector<pair<int, int>> a, vector<pair<int, int>> b) {
+        sort(a.begin(), a.end());
+        sort(b.begin(), b.end());
+        for(int i = 0, j = 0; i < int(a.size()) && j < int(b.size());) {
+            if(a[i] == b[j]) return true;
+            if(a[i] < b[j]) i++;
+            else j++;
+        }
+        return false;
+    };
+    for(Enemy& e : enemies.enemies){
+        vector<pair<int, int>> pos = e.get_positions();
+        if(crash(pos, o_pos)) {
+            e.decrease_HP(INF);
         }
     }
-    if (hit_flag_crash) player.get_damage(INF);
+    if(crash(p_pos, e_pos) || crash(p_pos, o_pos)) {
+        player.get_damage(INF);        
+    }
 }
 void game::play(){
     int c;

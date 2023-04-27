@@ -40,8 +40,8 @@ void Obstacles::move() {
 
 // Generate an obstacle that is to the right of the frame
 Obstacle Obstacles::generate_obstacle() {
-    int x = rng() % (RX - LX + 1) + LX;
-    int y = rng() % (RY - LY + 1) + RY + 1;
+    int x = rng() % (RX - LX + 1 - 2) + LX;
+    int y = rng() % (RY - LY + 1 - 2) + RY + 1;
     int level = 0;
     return Obstacle(difficulty, x, y, level, LX, LY, RX, RY);
 }
@@ -65,4 +65,14 @@ int Obstacles::hit(int bx, int by) {
         }
     }
     return hit_flag;
+}
+
+vector<pair<int, int>> Obstacles::get_positions() {
+    vector<pair<int, int>> ret;
+    for(Obstacle& e : obstacles){
+        for(Obstacle::Obstacle_char& t : e.Obstacle_figure[e.level]){
+            ret.emplace_back(e.x + t.x, e.y + t.y);
+        }
+    }
+    return ret;
 }

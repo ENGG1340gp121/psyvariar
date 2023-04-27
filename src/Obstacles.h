@@ -18,5 +18,6 @@ class Obstacles {
         vector<Obstacle> obstacles;
         Obstacle generate_obstacle();
         void clear_obstacle();
+        vector<pair<int, int>> get_positions();
     private:
 };

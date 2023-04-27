@@ -78,3 +78,11 @@ void Enemy::shoot(int velocity){
         }
     }
 }
+
+vector<pair<int, int>> Enemy::get_positions() {
+    vector<pair<int, int>> ret;
+    for(Enemy_char& t : Enemy_figure[level]){
+        ret.emplace_back(x + t.x, y + t.y);
+    }
+    return ret;
+}
