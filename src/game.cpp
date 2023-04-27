@@ -24,10 +24,11 @@ game::game(int difficulty, int X_size,int Y_size){
     win = stdscr;
     player = Player(LX, LY, RX, RY, 0, 10, 1, 1);
     enemies = Enemies(difficulty, LX, LY, RX, RY);
-//    obstacles = Obstacles(LX, LY, RX, RY);
+    obstacles = Obstacles(difficulty, LX, LY, RX, RY);
     b = Board(win, Y_size, X_size);
     enemies_defeated = 0;
 }
+
 
 void game::all_move(){
     
@@ -70,16 +71,40 @@ void game::all_move(){
     }
     swap(player.Bullets, alive_bullets);
     alive_bullets.clear();
+
+    for(Bullet& bullet : player.Bullets){
+        int flag = obstacles.hit(bullet.x, bullet.y);
+        if(bullet.is_inside()&&!flag)
+            alive_bullets.push_back(bullet);
+    }
+    swap(player.Bullets, alive_bullets);
+    alive_bullets.clear();
+
+    for(Bullet& bullet : player.Bullets){
+        bullet.move(1, 1);
+        int flag = obstacles.hit(bullet.x, bullet.y);
+        if(bullet.is_inside()&&!flag)
+            alive_bullets.push_back(bullet);
+    }
+    swap(player.Bullets, alive_bullets);
+    alive_bullets.clear();
+
+    obstacles.move();
+    for(Bullet& bullet : player.Bullets){
+        int flag = obstacles.hit(bullet.x, bullet.y);
+        if(bullet.is_inside()&&!flag)
+            alive_bullets.push_back(bullet);
+    }
+    swap(player.Bullets, alive_bullets);
+    alive_bullets.clear();
 }
 void game::check_player_damage(){
-    bool hit_flag_crash = 0;
+    vector<pair<int, int>> p_pos = player.get_positions();
+    vector<pair<int, int>> e_pos = enemies.get_positions();
+    vector<pair<int, int>> o_pos = obstacles.get_positions();
+
     for(Enemy& e : enemies.enemies){
         for(Player::plane_char& p : player.Plane[player.Level]){
-            for(Enemy::Enemy_char& t : e.Enemy_figure[e.level]){
-                if(e.x + t.x == player.x + p.x && e.y +  t.y == player.y + p.y){
-                    hit_flag_crash = 1;
-                }
-            }
             vector<Bullet> tmp;
             for(Bullet& b : e.bullets){
                 if(b.x == player.x + p.x && b.y == player.y + p.y){
@@ -91,7 +116,26 @@ void game::check_player_damage(){
             swap(tmp, e.bullets);
         }
     }
-    if (hit_flag_crash) player.get_damage(INF);
+
+    auto crash = [] (vector<pair<int, int>> a, vector<pair<int, int>> b) {
+        sort(a.begin(), a.end());
+        sort(b.begin(), b.end());
+        for(int i = 0, j = 0; i < int(a.size()) && j < int(b.size());) {
+            if(a[i] == b[j]) return true;
+            if(a[i] < b[j]) i++;
+            else j++;
+        }
+        return false;
+    };
+    for(Enemy& e : enemies.enemies){
+        vector<pair<int, int>> pos = e.get_positions();
+        if(crash(pos, o_pos)) {
+            e.decrease_HP(INF);
+        }
+    }
+    if(crash(p_pos, e_pos) || crash(p_pos, o_pos)) {
+        player.get_damage(INF);        
+    }
 }
 void game::play(){
     int c;
@@ -112,6 +156,7 @@ void game::play(){
         else player.move(c);
         all_move();
         enemies.add(MIN_ENEMIES);
+        obstacles.add(5);
         check_player_damage();
         if (player.HP <= 0) break;
         display();
@@ -143,6 +188,7 @@ void game::display() {
     draw_border();
     player.draw(win);
     enemies.draw(win);
+    obstacles.draw(win);
     b.board(player,enemies_defeated);
     wrefresh(win);
 }
