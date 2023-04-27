@@ -54,7 +54,7 @@ void Board::board(Player player, int enemies_defeated){
     enemy_defeated = 0;
     overheating = player.gun_heat;
     // player.name;
-    level = score/100;
+    level = score/200;
     //depth;
     control_board();
     spaceship_info();
@@ -120,12 +120,12 @@ void Board::exploit_info(){// control the right board
     if (overheating >= 5){
         wprintw(win3,"%s","_____________!!!!warning!!!!____________");
         wmove(win3,14,3);
-        wprintw(win3,"%s","           ! weapon overheating !         ");
+        wprintw(win3,"%s","          ! weapon overheating !         ");
         
     }
     else{
         wmove(win3,13,3);
-        wprintw(win3,"%s","                weapon ready      ");
+        wprintw(win3,"%s","               weapon ready      ");
 
     }
     wmove(win3,15,3);
@@ -148,15 +148,15 @@ void Board::exploit_info(){// control the right board
     wmove(win3,21,2);
     wprintw(win3,"%s","[press \"up\", \"down\", \"left\", \"right\" to move]");
     wmove(win3,22,2);
-    wprintw(win3,"%s","[press \"space\" to shoot                           ]");
+    wprintw(win3,"%s","[press \"space\" to shoot  ]");
     wmove(win3,23,2);
-    wprintw(win3,"%s","[press \"q\" to quit                                ]");
+    wprintw(win3,"%s","[press \"q\" to quit  ]");
     wmove(win3,24,2);
-    wprintw(win3,"%s","[press \"p\" to pause                               ]");
+    wprintw(win3,"%s","[press \"esc\" to slow down the time  ]");
     wmove(win3,25,2);
-    wprintw(win3,"%s","[press \"r\" to resume                              ]");
+    wprintw(win3,"%s","[press \"r\" to resume  ]");
     wmove(win3,26,2);
-    wprintw(win3,"%s","[press \"f\" to fire LASER CONNON                   ]"); 
+    wprintw(win3,"%s","[press \"f\" to fire LASER CONNON  ]"); 
     wmove(win3,27,3);
     wprintw(win3,"%s","_____________________________________________");
     wmove(win3,28,3);
@@ -167,43 +167,43 @@ void Board::exploit_info(){// control the right board
     wprintw(win3,"%s","<<=|----------EARTH-FEDERATION----------|=>>");
     wmove(win3,31,3);
     wprintw(win3,"%s","_____________________________________________");
-    if (score > 10){
+    if (score > 50){
         wmove(win3,32,3);
         wprintw(win3,"%s","<<=|------------LANCE-CORPORAL------ ----|=>>");
     }
     wmove(win3,33,3);
     wprintw(win3,"%s","____________________________________________");
-    if (score > 50){
+    if (score > 100){
         wmove(win3,34,3);
         wprintw(win3,"%s","<<=|----------------COLONEL--------------|=>>");
     }
     wmove(win3,35,3);
     wprintw(win3,"%s","____________________________________________");
-    if (score > 100){
+    if (score > 200){
         wmove(win3,36,3);
         wprintw(win3,"%s","<<=|--------------AIR-MARSHAL------------|=>>");
     }
     wmove(win3,37,3);
     wprintw(win3,"%s","____________________________________________");
-    if (score > 150){
+    if (score > 300){
         wmove(win3,38,3);
         wprintw(win3,"%s","<<=|----------------ADMIRAL--------------|=>>");
     }
     wmove(win3,39,3);
     wprintw(win3,"%s","____________________________________________");
-    if (score > 200){
+    if (score > 500){
         wmove(win3,40,3);
         wprintw(win3,"%s","<<=|------------UNITED-MARSHAL-----------|=>>");
     }
     wmove(win3,41,3);
     wprintw(win3,"%s","____________________________________________");
-    if (score > 250){
+    if (score > 1000){
         wmove(win3,42,3);
         wprintw(win3,"%s","<<=|---------------WAR-LEGEND-------------|=>>");
     }
     wmove(win3,43,3);
     wprintw(win3,"%s","____________________________________________");
-    if (score > 300){
+    if (score > 2000){
         wmove(win3,44,3);
         wprintw(win3,"%s","<<=|---------------GOD-OF-WAR-------------|=>>");
     }
