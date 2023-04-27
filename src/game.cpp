@@ -140,6 +140,6 @@ void game::display() {
     draw_border();
     player.draw(win);
     enemies.draw(win);
-    b.board(player,enemies_defeated);
+    b.board(player);
     wrefresh(win);
 }
