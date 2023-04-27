@@ -109,6 +109,7 @@ bool Player::shoot(){
     for(plane_char& c : Gun[Level]){
         Bullets.push_back(Bullet(x+c.x, y+c.y, LX, LY, RX, RY, '-'));
     }
+    return 1;
 }
 void Player::get_damage(int value){
     HP -= value;

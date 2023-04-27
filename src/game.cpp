@@ -23,6 +23,7 @@ game::game(int difficulty, int X_size,int Y_size){
     enemies = Enemies(difficulty, LX, LY, RX, RY);
 //    obstacles = Obstacles(LX, LY, RX, RY);
     b = Board(win, Y_size, X_size);
+    enemies_defeated = 0;
 }
 
 void game::all_move(){
@@ -139,6 +140,6 @@ void game::display() {
     draw_border();
     player.draw(win);
     enemies.draw(win);
-    b.board(player);
+    b.board(player,enemies_defeated);
     wrefresh(win);
 }
