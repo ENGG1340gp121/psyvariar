@@ -5,7 +5,7 @@
 using namespace std;
 int main(){
 	load_background load;
-	//load.play();
+	load.play();
 	//Menu::menu()
 	game g(0, 30, 100);
 	g.play();

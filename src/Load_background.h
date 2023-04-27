@@ -6,7 +6,6 @@ using namespace std;
 
 class load_background{
     public:
-        void initialize();
         void play();
         void start_win(WINDOW *main_Win);
         void probar(WINDOW *main_Win);

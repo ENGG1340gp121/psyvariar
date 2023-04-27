@@ -6,24 +6,18 @@
 using namespace std;
 
 void load_background::play(){
-    void initialize();
+    initscr();  //按键不需要输入回车直接交互
+    cbreak();   //按键不显示
+    noecho();   //隐藏光标
+    refresh();  //刷新屏幕
     const int Width = 150;  //窗口宽度
     const int Length = 50;  //窗口高度
     WINDOW *main_Win=newwin(Length, Width, 0, 0); //创建子窗口
+    wrefresh(main_Win); //刷新窗口
     start_win(main_Win);
     probar(main_Win);
     background_story(main_Win);
 }
-
-void load_background::initialize() {
-    //ncurses初始化
-    initscr();  //按键不需要输入回车直接交互
-    cbreak();   //按键不显示
-    noecho();   //隐藏光标
-    curs_set(0);    //随机数
-    srand(time(NULL));
-}
-
 
 void load_background::start_win(WINDOW *main_Win){
     box(main_Win, '.', '.');//窗口边框
