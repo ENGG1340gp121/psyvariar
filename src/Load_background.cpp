@@ -5,6 +5,16 @@
 
 using namespace std;
 
+void load_background::play(){
+    void initialize();
+    const int Width = 150;  //窗口宽度
+    const int Length = 50;  //窗口高度
+    WINDOW *main_Win=newwin(Length, Width, 0, 0); //创建子窗口
+    start_win(main_Win);
+    probar(main_Win);
+    background_story(main_Win);
+}
+
 void load_background::initialize() {
     //ncurses初始化
     initscr();  //按键不需要输入回车直接交互
@@ -106,8 +116,4 @@ void load_background::background_story(WINDOW *main_Win) {
     }
 }
 
-void load_background::play(WINDOW *main_Win){
-    start_win(main_Win);
-    probar(main_Win);
-    background_story(main_Win);
-}
+
