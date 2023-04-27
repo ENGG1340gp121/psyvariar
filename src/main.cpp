@@ -11,9 +11,9 @@ int main(int argc, char *argv[]){
 	load_background load;
 	load.play();
 	menu m;
-	m.Menu();
+	// m.Menu();
 	if(argc == 1) load.play();
-    int x = menu::Menu_play();
+    int x = m.Menu_play();
 	while (x != 0){
 	    if (x == 1){
     		game g(0, 30, 100);
