@@ -1,4 +1,8 @@
-#include <bits/stdc++.h>
+#include <iostream>
+#include <vector>
+#include <string>
+#include <algorithm>
+
 //#include "menu.h"
 #include <ncurses.h>
 // #include "Player.h"

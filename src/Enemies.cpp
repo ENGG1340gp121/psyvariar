@@ -1,4 +1,7 @@
-#include <bits/stdc++.h>
+#include <iostream>
+#include <vector>
+#include <string>
+#include <algorithm>
 #include <curses.h>
 #include "Enemies.h"
 #include "Enemy.h"
