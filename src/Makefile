@@ -13,8 +13,8 @@ Enemies.o: Enemies.cpp Enemies.h
 Bullet.o: Bullet.cpp Bullet.h
 	g++ -c Bullet.cpp
 
-Board.o: Board.cpp board.h Player.h
-	g++ -c board.cpp
+Board.o: Board.cpp Board.h Player.h
+	g++ -c Board.cpp
 
 game.o: game.cpp game.h Player.h Enemies.h Bullet.h Board.h
 	g++ -c game.cpp

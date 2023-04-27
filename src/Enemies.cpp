@@ -51,8 +51,15 @@ Enemy Enemies::generate_enemy() {
 
 // Add new enemies until there are at least MIN_ENEMIES eneimes
 void Enemies::add(int MIN_ENEMIES) {
-    while(int(enemies.size()) < MIN_ENEMIES) {
+	int alive_cnt = 0;
+	for(auto&e:enemies) {
+		if(e.alive()) {
+			alive_cnt++;
+		}
+	}
+    while(alive_cnt < MIN_ENEMIES) {
         enemies.push_back(generate_enemy());
+		alive_cnt++;
     }
 }
 
