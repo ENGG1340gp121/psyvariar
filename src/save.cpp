@@ -42,3 +42,4 @@ void Save::insert_rank(string file,string username, int score){// insert the new
     fout.close();
 }
 
+

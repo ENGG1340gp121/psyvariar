@@ -20,33 +20,16 @@ Bullet.o: Bullet.cpp Bullet.h
 	g++ -std=c++11 -c Bullet.cpp
 
 Board.o: Board.cpp Board.h Player.h
-<<<<<<< HEAD
-	g++ -c Board.cpp
-=======
 	g++ -std=c++11 -c Board.cpp
->>>>>>> 1e4794c7dc295c9ea111ef2fe4ea1ca27e77f334
 
-game.o: game.cpp game.h Player.h Enemies.h Bullet.h Board.h Obstacles.h
+game.o: game.cpp game.h Player.h Enemies.h Bullet.h Board.h Obstacles.h menu.h
 	g++ -std=c++11 -c game.cpp
 
-<<<<<<< HEAD
 menu.o: menu.cpp menu.h
-	g++ -c menu.cpp
+	g++ -std=c++11 -c menu.cpp
 
 main.o: main.cpp game.h Load_background.h Board.h menu.h
-	g++ -c main.cpp
+	g++ -std=c++11 -c main.cpp
 
 main: main.o game.o Player.o Enemies.o Enemy.o Bullet.o Load_background.o Board.o menu.o
 	g++ main.o game.o Player.o Enemies.o Enemy.o Bullet.o Load_background.o Board.o menu.o -o main -lcurses
-=======
-main.o: main.cpp game.h Load_background.h Board.h
-	g++ -std=c++11 -c main.cpp
-
-main: main.o game.o Player.o Enemies.o Enemy.o Bullet.o Load_background.o Board.o Obstacle.o Obstacles.o
-	g++ -std=c++11 main.o game.o Player.o Enemies.o Enemy.o Bullet.o Load_background.o Board.o Obstacle.o Obstacles.o -o main -lcurses
->>>>>>> 1e4794c7dc295c9ea111ef2fe4ea1ca27e77f334
-
-clean:
-	rm -f *.o main
-
-.PHONY: clean

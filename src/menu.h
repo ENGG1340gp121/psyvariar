@@ -10,7 +10,7 @@ class menu{
         void game_instructions();
         void highest_scores();
         int Menu_play();
-	void Menu();
+	    void Menu();
 
     private:
 };

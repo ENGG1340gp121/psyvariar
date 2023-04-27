@@ -2,7 +2,6 @@
 #include <ncurses.h>
 #include <string>
 #include "menu.h"
-#include "game.h"
 using namespace std;
 int menu::show_menu_get_input(){
     initscr();
@@ -133,10 +132,10 @@ int menu::Menu_play(){
         return 0;
     }
 }
-void menu::Menu(){
-    int x = Menu_play();
-    if (x == 1){
-    	game g(0, 30, 100);
-        g.play();
-    }
-}
+// void menu::Menu(){
+//     int x = Menu_play();
+//     if (x == 1){
+//     	game g(0, 30, 100);
+//         g.play();
+//     }
+// }
