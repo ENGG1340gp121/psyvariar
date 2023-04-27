@@ -7,6 +7,7 @@
 using namespace std;
 
 
+
 /*
 void System_message(WINDOW win){
 
@@ -36,13 +37,15 @@ Board::Board(WINDOW* main_win, int _X, int _Y) {
     Y = _Y;
 
     // control_board
-    win1 = subwin(win, 11, 20, Y, 0);
+    win1 = subwin(win, 20, 50, Y, 0);
 
     // spaceship_info
-    win2 = subwin(win, 11, 30, Y, 20);
+    win2 = subwin(win, 20, 50, Y, 50);
 
     // exploit_info
-    win3 = subwin(win, 11, 30, Y, 50);
+    win3 = subwin(win, 20, 30, 0, X);
+
+
 }
 
 void Board::board(Player player){
@@ -109,7 +112,7 @@ void Board::exploit_info(){
     wprintw(win3,"%d",score);
 }
 
-void Board::spaceship(WINDOW* win, int level, int weapon){
+void Board::spaceship(WINDOW* win, int level, int weapon){// draw the image of spaceship according to it's level
     if (level>=0){
         wmove(win,5,4);
         wprintw(win,"%s","<=><+<->+><=>");
@@ -165,3 +168,5 @@ void Board::_HP(WINDOW* win){
         wmove(win,9,temp+i);   
     } 
 }
+
+   
