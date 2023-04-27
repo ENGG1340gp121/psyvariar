@@ -13,7 +13,7 @@ class Enemies {
         void move();
         void add(int MIN_ENEMIES);
         void shoot(int velocity);
-        bool hit(int bx, int by, int atk);
+        int hit(int bx, int by, int atk);
         mt19937 rng;
         int LX, LY, RX, RY, difficulty;
         vector<Enemy> enemies;

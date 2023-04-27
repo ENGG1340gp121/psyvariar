@@ -20,6 +20,7 @@ Player::Player(int _LX, int _LY, int _RX, int _RY, int _Level, int _HP, int _x, 
     Gun[0].push_back(plane_char('-', 0, 2));
     Gun[0].push_back(plane_char('-', 2, 2));
     atk[0] = 1;
+    MAX_HEAT[0]=5;
     LX = _LX, LY = _LY, RX = _RX, RY = _RY, Level = _Level, HP = _HP, x = _x, y = _y;
 }
 bool Player::check_inside(){
@@ -102,11 +103,16 @@ void Player::draw(WINDOW* win){
         mvwaddch(win, b.x, b.y, b.sym);
     }
 }
-void Player::shoot(){
+bool Player::shoot(){
+    if(gun_heat >= MAX_HEAT[Level]) return 0;
+    gun_heat ++;
     for(plane_char& c : Gun[Level]){
         Bullets.push_back(Bullet(x+c.x, y+c.y, LX, LY, RX, RY, '-'));
     }
 }
 void Player::get_damage(int value){
     HP -= value;
+}
+void Player::gun_heat_annealing(){
+    gun_heat--;
 }

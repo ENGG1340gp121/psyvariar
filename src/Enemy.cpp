@@ -45,10 +45,12 @@ void Enemy::move(int velocity){
 // Draw the plan and bullets
 // Only draw the part that is in the frame
 void Enemy::draw(WINDOW* win){
-    for(Enemy_char& c : Enemy_figure[level]){
-        int X = x + c.x, Y = y + c.y;
-        if(X < LX || X > RX || Y < LY || Y > RY) continue;
-        mvwaddch(win, X, Y, c.sym);
+    if(HP >0){
+        for(Enemy_char& c : Enemy_figure[level]){
+            int X = x + c.x, Y = y + c.y;
+            if(X < LX || X > RX || Y < LY || Y > RY) continue;
+            mvwaddch(win, X, Y, c.sym);
+        }
     }
     for(Bullet b : bullets){
         b.draw(win);

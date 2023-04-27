@@ -17,7 +17,7 @@ void Enemies::add_enemy(Enemy tmp){
 void Enemies::clear_enemy(){
     vector<Enemy> new_enemies;
     for(Enemy& e : enemies) {
-        if(e.alive())
+        if(e.alive() || e.bullets.size()>0)
             new_enemies.push_back(e);
     }
     swap(new_enemies, enemies);
@@ -25,9 +25,12 @@ void Enemies::clear_enemy(){
 
 // Draw all enemies
 void Enemies::draw(WINDOW* win){
+    vector<Enemy> tmp;
     for(Enemy& e: Enemies::enemies){
         e.draw(win);
+        if(e.alive() || e.bullets.size()>0) tmp.push_back(e);
     }
+    swap(enemies, tmp);
 }
 
 // Update the positions of all enemies and remove dead ones
@@ -55,13 +58,13 @@ void Enemies::add(int MIN_ENEMIES) {
 
 // Update the enemies and bullets if they are hit by a bullet (bx, by) that can do "atk" damages
 // Returns whether the bullet hits somehting
-bool Enemies::hit(int bx, int by, int atk) {
-    bool hit_flag = 0;
+int Enemies::hit(int bx, int by, int atk) {
+    int hit_flag = 0;
     for(Enemy& e : enemies){
         for(Enemy::Enemy_char& t : e.Enemy_figure[e.level])
             if(e.x +  t.x == bx && e.y +  t.y == by){
                 e.decrease_HP(atk);
-                hit_flag = 1;
+                hit_flag = 2;
             }
         vector<Bullet> bullet_alive;
         for(Bullet& b : e.bullets){
@@ -79,6 +82,7 @@ bool Enemies::hit(int bx, int by, int atk) {
 
 void Enemies::shoot(int velocity) {
     for(Enemy& e : enemies) {
-        e.shoot(velocity);
+        if (e.alive())
+            e.shoot(velocity);
     }
 }

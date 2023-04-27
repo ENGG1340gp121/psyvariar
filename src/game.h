@@ -9,6 +9,9 @@ class game{
     public:
         WINDOW *win;
         int TIME_OUT, MIN_ENEMIES;
+
+        int enemies_defeated;
+
         int LX, LY, RX, RY;
         Player player;
         Enemies enemies;

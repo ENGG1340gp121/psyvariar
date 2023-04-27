@@ -36,7 +36,9 @@ void game::all_move(){
     }
     vector<Bullet> alive_bullets;
     for(Bullet& bullet : player.Bullets){
-        bool flag = enemies.hit(bullet.x, bullet.y, player.atk[player.Level]);
+        int flag = enemies.hit(bullet.x, bullet.y, player.atk[player.Level]);
+        if(flag == 2)
+            enemies_defeated ++;
         if(bullet.is_inside()&&!flag)
             alive_bullets.push_back(bullet);
     }
@@ -45,7 +47,9 @@ void game::all_move(){
 
     for(Bullet& bullet : player.Bullets){
         bullet.move(1, 1);
-        bool flag = enemies.hit(bullet.x, bullet.y, player.atk[player.Level]);
+        int flag = enemies.hit(bullet.x, bullet.y, player.atk[player.Level]);
+        if(flag == 2)
+            enemies_defeated ++;
         if(bullet.is_inside()&&!flag)
             alive_bullets.push_back(bullet);
     }
@@ -54,7 +58,9 @@ void game::all_move(){
 
     enemies.move();
     for(Bullet& bullet : player.Bullets){
-        bool flag = enemies.hit(bullet.x, bullet.y, player.atk[player.Level]);
+        int flag = enemies.hit(bullet.x, bullet.y, player.atk[player.Level]);
+        if(flag == 2)
+            enemies_defeated ++;
         if(bullet.is_inside()&&!flag)
             alive_bullets.push_back(bullet);
     }
@@ -70,22 +76,30 @@ void game::check_player_damage(){
                     hit_flag_crash = 1;
                 }
             }
+            vector<Bullet> tmp;
             for(Bullet& b : e.bullets){
                 if(b.x == player.x + p.x && b.y == player.y + p.y){
                     player.get_damage(1);
                 }
+                else
+                    tmp.push_back(b);
             }
+            swap(tmp, e.bullets);
         }
     }
     if (hit_flag_crash) player.get_damage(INF);
 }
 void game::play(){
     int c;
+    int count = 0;
     while((c = getch()) != KEY_F(1)){
         if (c == ' '){
-            player.shoot();
+            if(player.shoot() == 0)
+                //show_over_heat_warning();
+                continue;
         }
         else if (c == 'f'){
+            enemies.enemies.clear();
             continue;
         }
         else if (c == 'q'){
@@ -97,6 +111,9 @@ void game::play(){
         check_player_damage();
         if (player.HP <= 0) break;
         display();
+        count = (count + 1) % 25;
+        if (count == 0)
+            player.gun_heat_annealing();
     }
     endwin();
 }
