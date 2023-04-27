@@ -21,6 +21,7 @@ class Enemy {
         void draw(WINDOW* win);
         void decrease_HP(int x);
         void shoot(int velocity);
+        vector<pair<int, int>> get_positions();
         int LX, LY, RX, RY, difficulty;
         int x, y, HP, level, clock_shoot, clock;
         vector<Enemy_char> Enemy_figure[3];

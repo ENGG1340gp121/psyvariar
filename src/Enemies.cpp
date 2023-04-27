@@ -43,16 +43,23 @@ void Enemies::move() {
 
 // Generate an enemy thet is that is to the right of the frame
 Enemy Enemies::generate_enemy() {
-    int x = rng() % (RX - LX + 1) + LX;
-    int y = rng() % (RY - LY + 1) + RY + 1;
+    int x = rng() % (RX - LX + 1 - 2) + LX;
+    int y = rng() % (RY - LY + 1 - 2) + RY + 1;
     int level = 0;
     return Enemy(difficulty, x, y, level, LX, LY, RX, RY, 5);
 }
 
 // Add new enemies until there are at least MIN_ENEMIES eneimes
 void Enemies::add(int MIN_ENEMIES) {
-    while(int(enemies.size()) < MIN_ENEMIES) {
+	int alive_cnt = 0;
+	for(auto&e:enemies) {
+		if(e.alive()) {
+			alive_cnt++;
+		}
+	}
+    while(alive_cnt < MIN_ENEMIES) {
         enemies.push_back(generate_enemy());
+		alive_cnt++;
     }
 }
 
@@ -85,4 +92,14 @@ void Enemies::shoot(int velocity) {
         if (e.alive())
             e.shoot(velocity);
     }
+}
+
+vector<pair<int, int>> Enemies::get_positions() {
+    vector<pair<int, int>> ret;
+    for(Enemy& e : enemies){
+        for(Enemy::Enemy_char& t : e.Enemy_figure[e.level]){
+            ret.emplace_back(e.x + t.x, e.y + t.y);
+        }
+    }
+    return ret;
 }

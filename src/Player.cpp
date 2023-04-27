@@ -117,5 +117,16 @@ void Player::get_damage(int value){
 }
 void Player::gun_heat_annealing(){
     gun_heat--;
+<<<<<<< HEAD
     gun_heat = max(gun_heat, 0);
+=======
+}
+
+vector<pair<int, int>> Player::get_positions() {
+    vector<pair<int, int>> ret;
+    for(plane_char& t : Plane[Level]){
+        ret.emplace_back(x + t.x, y + t.y);
+    }
+    return ret;
+>>>>>>> 6ee469948a3e18295a77e70af50a43b3ec6791a7
 }

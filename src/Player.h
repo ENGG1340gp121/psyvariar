@@ -34,5 +34,6 @@ class Player{
         void get_damage(int value);
         void draw(WINDOW* win);
         void gun_heat_annealing();
+        vector<pair<int, int>> get_positions();
     private:
 };

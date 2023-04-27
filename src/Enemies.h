@@ -19,5 +19,6 @@ class Enemies {
         vector<Enemy> enemies;
         Enemy generate_enemy();
         void clear_enemy();
+        vector<pair<int, int>> get_positions();
     private:
 };
