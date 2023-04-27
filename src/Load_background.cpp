@@ -106,3 +106,8 @@ void load_background::background_story(WINDOW *main_Win) {
     }
 }
 
+void load_background::play(WINDOW *main_Win){
+    start_win(main_Win);
+    probar(main_Win);
+    background_story(main_Win);
+}
