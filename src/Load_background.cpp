@@ -17,6 +17,7 @@ void load_background::play(){
     start_win(main_Win);
     probar(main_Win);
     background_story(main_Win);
+    delwin(main_Win);   //删除窗口
 }
 
 void load_background::start_win(WINDOW *main_Win){

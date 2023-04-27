@@ -13,17 +13,17 @@ Enemies.o: Enemies.cpp Enemies.h
 Bullet.o: Bullet.cpp Bullet.h
 	g++ -c Bullet.cpp
 
-board.o: board.cpp board.h
+Board.o: Board.cpp board.h Player.h
 	g++ -c board.cpp
 
-game.o: game.cpp game.h Player.h Enemies.h Bullet.h
+game.o: game.cpp game.h Player.h Enemies.h Bullet.h Board.h
 	g++ -c game.cpp
 
-main.o: main.cpp game.h Load_background.h
+main.o: main.cpp game.h Load_background.h Board.h
 	g++ -c main.cpp
 
-main: main.o game.o Player.o Enemies.o Enemy.o Bullet.o Load_background.o board.o
-	g++ main.o game.o Player.o Enemies.o Enemy.o Bullet.o Load_background.o board.o -o main -lcurses
+main: main.o game.o Player.o Enemies.o Enemy.o Bullet.o Load_background.o Board.o
+	g++ main.o game.o Player.o Enemies.o Enemy.o Bullet.o Load_background.o Board.o -o main -lcurses
 
 clean:
 	rm -f *.o main
