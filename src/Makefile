@@ -31,8 +31,8 @@ game.o: game.cpp game.h Enemies.h Bullet.h Board.h
 main.o: main.cpp game.h Load_background.h menu.h
 	g++ -std=c++11 -c main.cpp
 
-main: main.o game.o Player.o Enemies.o Enemy.o Bullet.o Load_background.o Board.o menu.o Obstacles.o Obstacle.o
-	g++ main.o game.o Player.o Enemies.o Enemy.o Bullet.o Load_background.o Board.o menu.o Obstacles.o Obstacle.o -o main -lcurses
+main: main.o game.o Player.o Enemies.o Enemy.o Bullet.o Load_background.o Board.o menu.o Obstacle.o Obstacles.o
+	g++ -std=c++11 main.o game.o Player.o Enemies.o Enemy.o Bullet.o Load_background.o Board.o Obstacle.o Obstacles.o menu.o -o main -lcurses
 
 clean:
 	rm -f *.o main

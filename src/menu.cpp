@@ -4,11 +4,21 @@
 #include "menu.h"
 using namespace std;
 void menu::Menu(){
-
+    
+}
+int mygetch() {
+	int res = -1;
+	while(res == -1) {
+		res = getch();
+	}
+	return res;
 }
 int menu::show_menu_get_input(){
     initscr();
     WINDOW *win = newwin(50,150,0,0);
+//	keypad(stdscr, TRUE);
+	cbreak();
+	noecho();
     wmove(win,0,0);
     wprintw(win,"Menu:");
     wmove(win,1,0);
@@ -23,14 +33,15 @@ int menu::show_menu_get_input(){
     wprintw(win,"Please enter an integer from 1 to 4: ");
     refresh();
     wrefresh(win);
-    int n;
-    int line;
-    n = getch() - '0';
+	int n = mygetch() - '0', line;
     line = 8;
     while (n!=1 && n!=2 && n!=3 && n!=4 && n!=5){
-        refresh();
-	    wrefresh(win);
-        n = getch() - '0';
+        wmove(win,line,0);
+        wprintw(win,"Invalid input! Please enter an integer from 1 to 5: ");
+       refresh();
+		wrefresh(win);
+		n = mygetch() - '0';
+        line += 1;
     }
     refresh();
     wrefresh(win);
@@ -55,6 +66,8 @@ int menu::process_input(int n){
 int menu::change_difficulty_level(){
     initscr();
     WINDOW *new_win = newwin(50,150,0,0);
+//	keypad(stdscr, TRUE);
+	cbreak();
     int difficulty, line;
     difficulty = 1;
     line = 2;
@@ -68,12 +81,12 @@ int menu::change_difficulty_level(){
     refresh();
     wrefresh(new_win);
     char input1;
-    input1 = getch();
+    input1 = mygetch();
     while (input1!='c' && input1!='q'){
         wmove(new_win,line,0);
         wprintw(new_win,"Invalid input! Please enter 'c' or 'q': ");
         wrefresh(new_win);
-        input1 = getch();
+        input1 = mygetch();
         line += 1;
     }
     wrefresh(new_win);
@@ -86,12 +99,12 @@ int menu::change_difficulty_level(){
         wprintw(new_win,"Please choose a difficulty level (from 1 to 3): ");
         wrefresh(new_win);
         int input2;
-        input2 = getch() - '0';
+        input2 = mygetch() - '0';
         while (input2!=1 && input2!=2 && input2!=3){
             wmove(new_win,line+1,0);
             wprintw(new_win,"Invalid input! Please enter an integer from 1 to 3: ");
             wrefresh(new_win);
-            input2 = getch() - '0';
+            input2 = mygetch() - '0';
             line += 1;
         } 
         wrefresh(new_win);
@@ -104,6 +117,8 @@ int menu::change_difficulty_level(){
 void menu::game_instructions(){
     initscr();
     WINDOW *new_win = newwin(50,150,0,0);
+//	keypad(stdscr, TRUE);
+	cbreak();
     wmove(new_win,0,0);
     wprintw(new_win,"Game Instructions:");
     wmove(new_win,2,0);
