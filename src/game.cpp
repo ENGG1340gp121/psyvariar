@@ -16,12 +16,12 @@ game::game(int difficulty, int X_size,int Y_size){
 	TIME_OUT = 20;
 	MIN_ENEMIES = 10;
     initscr();
+    win = stdscr; //newwin(50,150,0,0);
     cbreak();
     timeout(TIME_OUT);
     keypad(stdscr, TRUE);
     LX = 1, RY = Y_size - 2;
     LY = 1, RX = X_size - 2;
-    win = stdscr;
     player = Player(LX, LY, RX, RY, 0, 10, 1, 1);
     enemies = Enemies(difficulty, LX, LY, RX, RY);
     obstacles = Obstacles(difficulty, LX, LY, RX, RY);
@@ -164,6 +164,7 @@ void game::play(){
         if (count == 0)
             player.gun_heat_annealing();
     }
+	delwin(win);
     endwin();
 }
 
@@ -190,5 +191,6 @@ void game::display() {
     enemies.draw(win);
     obstacles.draw(win);
     b.board(player,enemies_defeated);
+	refresh();
     wrefresh(win);
 }

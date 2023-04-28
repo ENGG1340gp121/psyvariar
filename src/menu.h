@@ -9,7 +9,7 @@ class menu{
         int change_difficulty_level();
         void game_instructions();
         void highest_scores();
-        int Menu_play();
+        pair<int, int>Menu_play();
 	    void Menu();
 
     private:

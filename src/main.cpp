@@ -9,13 +9,13 @@
 using namespace std;
 int main(int argc, char *argv[]){
 	load_background load;
-	load.play();
 	menu m;
-	// m.Menu();
 	if(argc == 1) load.play();
-    int x = m.Menu_play();
-	while (x != 0){
-	    if (x == 1){
+	pair<int, int> x = {0, 0};
+	while (x.first != 5){
+    	x = m.Menu_play();
+	    if (x.first == 1){
+			x = {0, 0};
     		game g(0, 30, 100);
         	g.play();
     	}
