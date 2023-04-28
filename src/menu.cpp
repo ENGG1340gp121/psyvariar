@@ -4,7 +4,7 @@
 #include "menu.h"
 using namespace std;
 void menu::Menu(){
-    
+
 }
 int mygetch() {
 	int res = -1;
@@ -123,6 +123,7 @@ void menu::game_instructions(){
     wprintw(new_win,"Game Instructions:");
     wmove(new_win,2,0);
     wprintw(new_win, "1. Introduction:\nWelcome to Psyvariar, a text-based game where you control a fighter plane and battle against waves of enemy planes. Your mission is to survive as long as possible.\n2. Controls:\nUse the arrow keys to move your plane up, down, left, and right. Press the spacebar to fire bullets at the enemy planes.\n3. Gameplay:\nThe game consists of 3 levels, each with increasing difficulty. During the game, you will face waves of enemy planes that will try to shoot you down.\nAlso be careful not to collide with any enemy planes or obstacles, as this will result in your plane being destroyed.\n4. Game Over:\nThe game will end when your plane is destroyed. Your final flying distance will be displayed, and you will have the option to play again.\n\nThat's it! We hope this helps you get started on your Plane War game. Good luck!");
+    wprintw(new_win, "Please input anything to return.");
     refresh();
     wrefresh(new_win);
     curs_set(0);
