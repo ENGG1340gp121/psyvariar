@@ -1,5 +1,5 @@
 #include <iostream>
-#include <ncurses.h>
+#include <curses.h>
 using namespace std;
 class menu{
     public:
@@ -8,9 +8,8 @@ class menu{
         int process_input(int n);
         int change_difficulty_level();
         void game_instructions();
-        void highest_scores();
+        void print_rank_board();
         int Menu_play();
 	    void Menu();
-
     private:
 };

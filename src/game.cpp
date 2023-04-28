@@ -138,6 +138,7 @@ void game::check_player_damage(){
     }
 }
 void game::play(){
+    curs_set(0);
     int c;
     int count = 0;
     while((c = getch()) != KEY_F(1)){
@@ -164,6 +165,8 @@ void game::play(){
         if (count == 0)
             player.gun_heat_annealing();
     }
+    curs_set(1);
+    delwin(win);
     endwin();
 }
 

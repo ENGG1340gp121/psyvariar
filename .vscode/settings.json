@@ -81,6 +81,8 @@
 		"unordered_set": "cpp",
 		"valarray": "cpp",
 		"variant": "cpp",
-		"vector": "cpp"
-	}
+		"vector": "cpp",
+		"filesystem": "cpp"
+	},
+	"C_Cpp.errorSquiggles": "disabled"
 }

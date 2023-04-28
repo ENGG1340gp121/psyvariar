@@ -1,8 +1,11 @@
 #include <iostream>
-#include <ncurses.h>
+#include <curses.h>
 #include <string>
 #include "menu.h"
 using namespace std;
+void menu::Menu(){
+
+}
 int menu::show_menu_get_input(){
     initscr();
     WINDOW *win = newwin(50,150,0,0);
@@ -11,31 +14,28 @@ int menu::show_menu_get_input(){
     wmove(win,1,0);
     wprintw(win,"1. Start a New Game");
     wmove(win,2,0);
-    wprintw(win,"2. Difficulty Level");
+    wprintw(win,"2. Game Handbook");
     wmove(win,3,0);
-    wprintw(win,"3. Game Instructions");
+    wprintw(win,"3. Print Ranking Board");
     wmove(win,4,0);
-    wprintw(win,"4. Highest Scores");
-    wmove(win,5,0);
-    wprintw(win,"5. Quit Game");
+    wprintw(win,"4. Quit Game");
     wmove(win,7,0);
-    wprintw(win,"Please enter an integer from 1 to 5: ");
+    wprintw(win,"Please enter an integer from 1 to 4: ");
     refresh();
     wrefresh(win);
-    int n, line;
+    int n;
+    int line;
     n = getch() - '0';
     line = 8;
     while (n!=1 && n!=2 && n!=3 && n!=4 && n!=5){
-        wmove(win,line,0);
-        wprintw(win,"Invalid input! Please enter an integer from 1 to 5: ");
         refresh();
-	wrefresh(win);
+	    wrefresh(win);
         n = getch() - '0';
-        line += 1;
     }
     refresh();
     wrefresh(win);
     delwin(win);
+    endwin();
     return n;
 }
 int menu::process_input(int n){
@@ -43,17 +43,12 @@ int menu::process_input(int n){
         return 1;
     }
     else if (n == 2){
-        change_difficulty_level();
+        game_instructions();
+        return 2;
     }
     else if (n == 3){
-        game_instructions();
-    }
-    else if (n == 4){
-        highest_scores();
-    }
-    else{
-        delwin(win);
-        endwin();            
+        print_rank_board();
+        return 2;
     }
     return 0;
 }
@@ -100,7 +95,7 @@ int menu::change_difficulty_level(){
             line += 1;
         } 
         wrefresh(new_win);
-        difficulty = input2; 
+        difficulty = input2;
         delwin(new_win);
         show_menu_get_input();
     }
@@ -112,24 +107,29 @@ void menu::game_instructions(){
     wmove(new_win,0,0);
     wprintw(new_win,"Game Instructions:");
     wmove(new_win,2,0);
-    wprintw(new_win,"1. Introduction:\nWelcome to Psyvariar, a text-based game where you control a fighter plane and battle against waves of enemy planes. Your mission is to survive as long as possible.\n2. Controls:\nUse the arrow keys to move your plane up, down, left, and right. Press the spacebar to fire bullets at the enemy planes.\n3. Gameplay:\nThe game consists of 3 levels, each with increasing difficulty. During the game, you will face waves of enemy planes that will try to shoot you down.\nAlso be careful not to collide with any enemy planes or obstacles, as this will result in your plane being destroyed.\n4. Game Over:\nThe game will end when your plane is destroyed. Your final flying distance will be displayed, and you will have the option to play again.\n\nThat's it! We hope this helps you get started on your Plane War game. Good luck!");
+    wprintw(new_win, "1. Introduction:\nWelcome to Psyvariar, a text-based game where you control a fighter plane and battle against waves of enemy planes. Your mission is to survive as long as possible.\n2. Controls:\nUse the arrow keys to move your plane up, down, left, and right. Press the spacebar to fire bullets at the enemy planes.\n3. Gameplay:\nThe game consists of 3 levels, each with increasing difficulty. During the game, you will face waves of enemy planes that will try to shoot you down.\nAlso be careful not to collide with any enemy planes or obstacles, as this will result in your plane being destroyed.\n4. Game Over:\nThe game will end when your plane is destroyed. Your final flying distance will be displayed, and you will have the option to play again.\n\nThat's it! We hope this helps you get started on your Plane War game. Good luck!");
     refresh();
     wrefresh(new_win);
-    getch();
+    curs_set(0);
+    while(getch() == -1);
+    curs_set(1);
     delwin(new_win);
+    endwin();
     show_menu_get_input();
 }
-void menu::highest_scores(){
+void menu::print_rank_board(){
     
 }
 int menu::Menu_play(){
-    int n = show_menu_get_input();
-    int x = process_input(n);
-    if (x == 1){
-        return 1;
-    }
-    else{
-        return 0;
+    while(1){
+        int n = show_menu_get_input();
+        int x = process_input(n);
+        if (x == 1){
+            return 1;
+        }
+        if (x == 0){
+            return 0;
+        }
     }
 }
 // void menu::Menu(){

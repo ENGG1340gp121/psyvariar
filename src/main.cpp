@@ -9,17 +9,16 @@
 using namespace std;
 int main(int argc, char *argv[]){
 	load_background load;
-	load.play();
-	menu m;
-	m.Menu();
 	if(argc == 1) load.play();
-    int x = menu::Menu_play();
+	menu *M = new menu;
+    int x = (*M).Menu_play();
+	delete(M);
 	while (x != 0){
-	    if (x == 1){
-    		game g(0, 30, 100);
-        	g.play();
-    	}
+    	game g(0, 30, 100);
+        g.play();
+		menu *M = new menu;
+		x = (*M).Menu_play();
+		delete(M);
 	}
 	return 0;
-
 }

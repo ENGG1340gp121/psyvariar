@@ -21,6 +21,7 @@ void load_background::play(){
     start_win(main_Win);
     probar(main_Win);
     background_story(main_Win);
+    endwin();
     delwin(main_Win);   //删除窗口
 }
 
