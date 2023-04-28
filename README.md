@@ -21,7 +21,7 @@
 * Our program code is splitted into multuple files based on class. (Program codes in multiple files)
 
 ## Libraries
-We uses `curses.h` library.
+We use `curses.h` library.
 
 ## How to compile and run
 ### Step 1.
