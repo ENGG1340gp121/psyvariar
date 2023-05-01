@@ -5,16 +5,18 @@
 using namespace std;
 
 class Save{
-    public: 
+    public:
+        struct record{
+	        string username;
+            int score;
+            record(string _username, int _score){
+                username = _username;
+                score = _score;
+            }
+        };
         string file;
         string username;
-        Save();
-        void create(string username);
-        void rank(string username, int score);
         vector<record> read(string file);
-        struct record{// this is a struct to store the username and score for the rank 
-            string username;
-            int score;
-        };
-       
-}
+        Save();
+        void insert_rank(string file, string username, int score);
+};

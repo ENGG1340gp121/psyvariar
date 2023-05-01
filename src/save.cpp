@@ -9,35 +9,37 @@
 using namespace std;
 
 Save::Save(){
+
 }
 
-bool operator<(const record& a, const record& b) const{// operator to sort the vector
-        return a.score < b.score;
-    }
+// operator to sort the vector
+bool operator < (const Save::record& a, const Save::record& b){
+    return a.score > b.score;
+}
 
-vector<record> Save::read(string file){ //read the file and store the data in a vector, return the sorted vector
+vector<Save::record> Save::read(string file){    
     vector<record> records;
     ifstream fin;
-    fin.open(file);// file written in format: username score
+    // file written in format: username score
+    fin.open(file);
     string line;
     while (getline(fin, line)){
         stringstream line_in(line);
         string username;
         int score;
         line_in >> username >> score;
-        record r;
-        r.username = username;
-        r.score = score;
+        record r(username, score);
         records.push_back(r);
     }
-    sort(records.begin(), records.end());
     fin.close();
+    sort(records.begin(), records.end());
     return records;
 }
 
-void Save::insert_rank(string file,string username, int score){// insert the new score in the file 
+// insert the new score in the file 
+void Save::insert_rank(string file, string username, int score){
     ofstream fout;
-    fout.open(file, ios::out|ios::app);
+    fout.open(file, ios::app);
     fout << username << " " << score << endl;
     fout.close();
 }
