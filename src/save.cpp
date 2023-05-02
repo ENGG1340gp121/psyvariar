@@ -42,7 +42,7 @@ void Save::insert_rank(string file, string username, int score){
     fout.open(file, ios::app);
     username.erase(username.end()-1,username.end());
     string output = username + " " + to_string(score);
-    fout << output;
+    fout << output << endl;
     fout.close();
 }
 
