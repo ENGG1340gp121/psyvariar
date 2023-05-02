@@ -8,6 +8,7 @@
 #include "save.h"
 #include "globals.h"
 using namespace std;
+//Menu.cpp is used to show the menu of the game and get the input from the user
 void menu::Menu(){
 
 }
@@ -18,6 +19,7 @@ int mygetch() {
 	}
 	return res;
 }
+// show the menu and get the input from the user
 int menu::show_menu_get_input(){
     initscr();
     WINDOW *win = newwin(50,150,0,0);
@@ -54,6 +56,7 @@ int menu::show_menu_get_input(){
     endwin();
     return n;
 }
+// show the menu of the game
 int menu::change_difficulty_level(){
     initscr();
     WINDOW *new_win = newwin(50,150,0,0);
@@ -105,6 +108,7 @@ int menu::change_difficulty_level(){
     }
     return difficulty;
 }
+// display the intructions
 void menu::game_instructions(){
     initscr();
     WINDOW *new_win = newwin(50,150,0,0);
@@ -125,6 +129,7 @@ void menu::game_instructions(){
     endwin();
     Menu_play();
 }
+// print the rank board
 void menu::print_rank_board(){
     initscr();
     WINDOW *new_win = newwin(50,150,0,0);
@@ -149,6 +154,7 @@ void menu::print_rank_board(){
     delwin(new_win);
     Menu_play();
 }
+// get username
 string menu::get_username(){
     initscr();
     WINDOW *new_win = newwin(50,150,0,0);
@@ -190,6 +196,7 @@ string menu::get_username(){
     delete[] user_name;
     return username_str;
 }
+// display the gameover 
 void menu::Menu_ending(int score){
     initscr();
     WINDOW *new_win = newwin(50,150,0,0);
@@ -204,6 +211,7 @@ void menu::Menu_ending(int score){
     print_rank_board();
     delwin(new_win);
 }
+// display the menu
 void menu::Menu_play(){
     int n = show_menu_get_input();
     while (n != 4){
@@ -225,6 +233,7 @@ void menu::Menu_play(){
         n = show_menu_get_input();
     }
 }
+// initialize the menu
 void menu::Menu_init(){
 	globle_username = get_username();
 }

@@ -6,25 +6,26 @@
 #include <curses.h>
 #include <unistd.h>
 #include "Load_background.h"
-
+//load_background.cpp is used to load the background story of the game
 using namespace std;
 
+//constructor
 void load_background::play(){
-    initscr();  //按键不需要输入回车直接交互
-    cbreak();   //按键不显示
-    noecho();   //隐藏光标
-    refresh();  //刷新屏幕
-    const int Width = 150;  //窗口宽度
-    const int Length = 50;  //窗口高度
-    WINDOW *main_Win=newwin(Length, Width, 0, 0); //创建子窗口
-    wrefresh(main_Win); //刷新窗口
+    initscr();  
+    cbreak();   
+    noecho();   
+    refresh();  
+    const int Width = 150;  
+    const int Length = 50;  
+    WINDOW *main_Win=newwin(Length, Width, 0, 0); 
+    wrefresh(main_Win); 
     start_win(main_Win);
     probar(main_Win);
     background_story(main_Win);
     endwin();
-    delwin(main_Win);   //删除窗口
+    delwin(main_Win);   
 }
-
+//print start-game window
 void load_background::start_win(WINDOW *main_Win){
     box(main_Win, '.', '.');//窗口边框
     wmove(main_Win, 20, 1);   //移动光标
@@ -54,7 +55,7 @@ void load_background::start_win(WINDOW *main_Win){
         if (getch() == ' ') break;
     }
 }
-
+//print loading window
 void load_background::probar(WINDOW *main_Win){
     wclear(main_Win);
     box(main_Win, '.', '.');
@@ -76,7 +77,7 @@ void load_background::probar(WINDOW *main_Win){
     wprintw(main_Win, "\n");
     wrefresh(main_Win);
 }
-
+//print background story
 void load_background::background_story(WINDOW *main_Win) {
     wclear(main_Win);
     box(main_Win, '.', '.');

@@ -10,6 +10,8 @@
 #include "Player.h"
 #define INF 1000000
 using namespace std;
+// game.cpp is used to control the game
+// the function of the game is defined as a vector of plane_char
 game::game(){
 
 }
@@ -30,7 +32,7 @@ game::game(int difficulty, int X_size,int Y_size){
     enemies_defeated = 0;
 }
 
-
+//This is the function to control the movement of the play board
 void game::all_move(){
     
     enemies.shoot(40);
@@ -99,6 +101,7 @@ void game::all_move(){
     swap(player.Bullets, alive_bullets);
     alive_bullets.clear();
 }
+// This function is used to check the damage of the player
 void game::check_player_damage(){
     vector<pair<int, int>> p_pos = player.get_positions();
     vector<pair<int, int>> e_pos = enemies.get_positions();
@@ -138,6 +141,7 @@ void game::check_player_damage(){
         player.get_damage(INF);        
     }
 }
+// This function is used to control the main frame of the game
 void game::play(){
     curs_set(0);
     int c;
@@ -186,7 +190,7 @@ void game::draw_border() {
         mvwaddch(win, LX - 1, i, '-');
     }
 }
-
+// Display the game
 void game::display() {
     werase(win);
     draw_border();
@@ -197,7 +201,7 @@ void game::display() {
 	refresh();
     wrefresh(win);
 }
-
+// Return the score to menu class
 int game::score_return(){
 	return enemies_defeated;
 }
