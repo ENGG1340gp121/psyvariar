@@ -11,3 +11,8 @@ haha 60
 ll 0
 12 30
 Che 210
+Juice 350
+Juice 240
+bowie 570
+bowie 120
+bowie 120

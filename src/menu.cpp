@@ -26,29 +26,41 @@ int menu::show_menu_get_input(){
 //	keypad(stdscr, TRUE);
 	cbreak();
 	noecho();
+    //+-------------------------------------+
+    //|                Menu                 |
+    //|         1. Start a New Game         |
+    //|          2. Game Handbook           |
+    //|        3. Print Ranking Board       |
+    //|            4. Quit Game             |
+    //| Please enter an integer from 1 to 4:|
+    //+-------------------------------------+
     wmove(win,0,0);
-    wprintw(win,"Menu:");
+    wprintw(win,"+-------------------------------------+");
     wmove(win,1,0);
-    wprintw(win,"1. Start a New Game");
+    wprintw(win,"|                Menu                 |");
     wmove(win,2,0);
-    wprintw(win,"2. Game Handbook");
+    wprintw(win,"|         1. Start a New Game         |");
     wmove(win,3,0);
-    wprintw(win,"3. Print Ranking Board");
+    wprintw(win,"|          2. Game Handbook           |");
     wmove(win,4,0);
-    wprintw(win,"4. Quit Game");
+    wprintw(win,"|        3. Print Ranking Board       |");
+    wmove(win,5,0);
+    wprintw(win,"|            4. Quit Game             |");
+    wmove(win,6,0);
+    wprintw(win,"| Please enter an integer from 1 to 4:|");
     wmove(win,7,0);
-    wprintw(win,"Please enter an integer from 1 to 4: ");
+    wprintw(win,"+-------------------------------------+");
     refresh();
     wrefresh(win);
     int n = mygetch() - '0';
-    int line = 8;
+    int line = 9;
     while (n != 1 && n != 2 && n != 3 && n != 4){
         wmove(win,line,0);
-        wprintw(win,"Invalid input! Please enter an integer from 1 to 4: %d\n", n);
+        wprintw(win,"Invalid input! Please enter an integer from 1 to 4");
         refresh();
 	    wrefresh(win);
 	    n = mygetch() - '0';
-        line += 1;
+//        line += 1;
     }
     refresh();
     wrefresh(win);
