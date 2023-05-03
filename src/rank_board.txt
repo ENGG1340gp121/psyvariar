@@ -5,3 +5,4 @@ Jason 400
 bowie 190
 che 110
 chec 0
+nano 50
