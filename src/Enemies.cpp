@@ -12,6 +12,7 @@ Enemies::Enemies(){}
 Enemies::Enemies(int _difficulty, int _LX, int _LY, int _RX, int _RY){
 	LX = _LX, LY = _LY, RX = _RX, RY = _RY;
     difficulty = _difficulty;
+    rng = mt19937(time(0));
 }
 // Add an enemy to the vector
 void Enemies::add_enemy(Enemy tmp){

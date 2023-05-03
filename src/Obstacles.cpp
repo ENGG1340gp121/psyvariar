@@ -11,6 +11,7 @@ Obstacles::Obstacles(){}
 Obstacles::Obstacles(int _difficulty, int _LX, int _LY, int _RX, int _RY){
 	LX = _LX, LY = _LY, RX = _RX, RY = _RY;
     difficulty = _difficulty;
+    rng = mt19937(time(0));
 }
 
 void Obstacles::add_obstacle(Obstacle tmp){
