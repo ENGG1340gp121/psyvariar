@@ -48,8 +48,8 @@ void Board::board(Player player, int enemies_defeated){
     weapon = player.weapon;
     weapon_name = "weapon_name";
     score = enemies_defeated*10;
-    weapon_ATK = 0;
-    weapon_speed = 0;
+    weapon_ATK = 1;
+    weapon_speed = 5;
     enemy_defeated = 0;
     overheating = player.gun_heat;
     // player.name;
