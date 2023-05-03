@@ -5,7 +5,7 @@
 #include <curses.h>
 #include "Obstacles.h"
 #include "Obstacle.h"
-
+//Obstacles.cpp is used to generate the obstacles and draw them on the screen
 Obstacles::Obstacles(){}
 Obstacles::Obstacles(int _difficulty, int _LX, int _LY, int _RX, int _RY){
 	LX = _LX, LY = _LY, RX = _RX, RY = _RY;

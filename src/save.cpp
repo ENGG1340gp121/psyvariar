@@ -7,7 +7,7 @@
 #include "save.h"
 #include "Player.h"
 using namespace std;
-
+//Save.cpp is used to save the score of the player and read the score from the file
 Save::Save(){
 
 }
@@ -41,6 +41,9 @@ void Save::insert_rank(string file, string username, int score){
     ofstream fout;
     fout.open(file, ios::app);
     fout << username << " " << score << endl;
+    username.erase(username.end()-1,username.end());
+    string output = username + " " + to_string(score);
+    fout << output << endl;
     fout.close();
 }
 

@@ -6,9 +6,13 @@
 #include "Player.h"
 #include "Bullet.h"
 using namespace std;
+// Player.cpp is used to define the player's plane 
+// and the function of the player's plane
+// the function of the player's plane is defined as a vector of plane_char
 Player::Player(){
 
 }
+//This is the constructor of the player's plane
 Player::Player(int _LX, int _LY, int _RX, int _RY, int _Level, int _HP, int _x, int _y){
     Plane[0].push_back(plane_char('>', 0, 0));
     Plane[0].push_back(plane_char('=', 0, 1));
@@ -27,6 +31,7 @@ Player::Player(int _LX, int _LY, int _RX, int _RY, int _Level, int _HP, int _x, 
     LX = _LX, LY = _LY, RX = _RX, RY = _RY, Level = _Level, HP = _HP, x = _x, y = _y;
     gun_heat = 0;
 }
+//This is the function to check whether the player's plane is inside the board
 bool Player::check_inside(){
     for(plane_char& c : Plane[Level]){
         int X = x + c.x, Y = y + c.y;
@@ -34,6 +39,7 @@ bool Player::check_inside(){
     }
     return 1;
 }
+//These are the function to move the player's plane
 void Player::move_left(){
     // for(plane_char& c : Plane[Level]){
     //     c.y--;
@@ -85,6 +91,7 @@ void Player::move_up(){
         x++;
     }
 }
+//This is the function to move the player's plane according to the input
 void Player::move(int c){
     if(c == KEY_LEFT){
 		Player::move_left();
@@ -99,6 +106,7 @@ void Player::move(int c){
 		Player::move_down();
 	}
 }
+//This is the function to draw the player's plane
 void Player::draw(WINDOW* win){
     for(plane_char& c : Plane[Level]){
         mvwaddch(win, x+c.x, y+c.y, c.sym);
@@ -107,6 +115,7 @@ void Player::draw(WINDOW* win){
         mvwaddch(win, b.x, b.y, b.sym);
     }
 }
+//This is the function to shoot the bullet
 bool Player::shoot(){
     if(gun_heat >= MAX_HEAT[Level]) return 0;
     gun_heat ++;
@@ -115,14 +124,17 @@ bool Player::shoot(){
     }
     return 1;
 }
+//This is the function to update the HP
 void Player::get_damage(int value){
     HP -= value;
 }
+//This is the function to update gun's heat
 void Player::gun_heat_annealing(){
     gun_heat--;
     gun_heat = max(gun_heat, 0);
 }
 
+//This is the function to update the bullet's position
 vector<pair<int, int>> Player::get_positions() {
     vector<pair<int, int>> ret;
     for(plane_char& t : Plane[Level]){

@@ -5,13 +5,14 @@
 #include <curses.h>
 #include "Enemies.h"
 #include "Enemy.h"
-
+//Enemies.cpp is used to generate the enemies and draw them on the screen
+//This is the constructor of the enemy
 Enemies::Enemies(){}
 Enemies::Enemies(int _difficulty, int _LX, int _LY, int _RX, int _RY){
 	LX = _LX, LY = _LY, RX = _RX, RY = _RY;
     difficulty = _difficulty;
 }
-
+// Add an enemy to the vector
 void Enemies::add_enemy(Enemy tmp){
     enemies.push_back(tmp);
 }
