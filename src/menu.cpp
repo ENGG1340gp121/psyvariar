@@ -135,23 +135,39 @@ void menu::print_rank_board(){
     WINDOW *new_win = newwin(50,150,0,0);
     Save s;
     vector<Save::record> records = s.read("rank_board.txt");
-    int line = 1;
+    int line = 3;
     wmove(new_win,0,0);
-    wprintw(new_win,"username   score   rank");
+    wprintw(new_win,"+---------------------------+");
+    wmove(new_win,1,0);
+    wprintw(new_win,"|                           |");
+    wmove(new_win,2,0);
+    wprintw(new_win,"|  rank   username   score  |");
     refresh();
     wrefresh(new_win);
-    for (int i=0; i<min(int(records.size()), 10); ++i){
+    for (int i=0; i<records.size(); ++i){
         wmove(new_win,line,0);
         const char* user_name = records[i].username.c_str();
-        wprintw(new_win, "%8s   %5d   %4d\n", user_name, records[i].score, i+1);
+        wprintw(new_win, "|  %4d   %8s   %5d  |\n", i+1, user_name, records[i].score);
         refresh();
         wrefresh(new_win);
         line++;
     }
-    wmove(new_win,line+2,0);
-    wprintw(new_win,"Please input anything to quit the rank board.");
-    mygetch();
+    wmove(new_win,line,0);
+    line++;
+    wprintw(new_win,"|                           |");
+    wmove(new_win,line,0);
+    line++;
+    wprintw(new_win,"+---------------------------+");
+    wmove(new_win,line,0);
+    line++;
+    wmove(new_win,line,0);
+    line++;
+    wprintw(new_win,"* Please input \'r\' to quit the rank board.");
+    refresh();
+    wrefresh(new_win);
+    while(mygetch() != 'r');
     delwin(new_win);
+    endwin();
     Menu_play();
 }
 // get username

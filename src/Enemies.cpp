@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+#include <time.h>
 #include <string>
 #include <algorithm>
 #include <curses.h>
@@ -47,6 +48,7 @@ void Enemies::move() {
 
 // Generate an enemy thet is that is to the right of the frame
 Enemy Enemies::generate_enemy() {
+    srand(time(NULL));
     int x = rng() % (RX - LX + 1 - 2) + LX;
     int y = rng() % (RY - LY + 1 - 2) + RY + 1;
     int level = 0;

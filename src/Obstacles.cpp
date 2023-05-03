@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <string>
+#include <time.h>
 #include <algorithm>
 #include <curses.h>
 #include "Obstacles.h"
@@ -43,6 +44,7 @@ void Obstacles::move() {
 
 // Generate an obstacle that is to the right of the frame
 Obstacle Obstacles::generate_obstacle() {
+    srand(time(NULL));
     int x = rng() % (RX - LX + 1 - 2) + LX;
     int y = rng() % (RY - LY + 1 - 2) + RY + 1;
     int level = 0;
