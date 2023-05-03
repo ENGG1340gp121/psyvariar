@@ -40,10 +40,9 @@ vector<Save::record> Save::read(string file){
 void Save::insert_rank(string file, string username, int score){
     ofstream fout;
     fout.open(file, ios::app);
-    fout << username << " " << score << endl;
     username.erase(username.end()-1,username.end());
-    string output = username + " " + to_string(score);
-    fout << output << endl;
+//    string output = username + " " + to_string(score);
+    fout << username << " " << score << endl;
     fout.close();
 }
 
