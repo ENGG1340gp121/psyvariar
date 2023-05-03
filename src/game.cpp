@@ -7,6 +7,7 @@
 #include "Enemies.h"
 #include "Bullet.h"
 #include "Board.h"
+#include "Player.h"
 #define INF 1000000
 using namespace std;
 game::game(){
@@ -195,4 +196,8 @@ void game::display() {
     b.board(player,enemies_defeated);
 	refresh();
     wrefresh(win);
+}
+
+int game::score_return(){
+	return enemies_defeated;
 }

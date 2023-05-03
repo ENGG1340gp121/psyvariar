@@ -28,5 +28,6 @@ class game{
     	void display();
         void draw_border();
         void check_player_damage();
+    	int score_return();
     private:
 };

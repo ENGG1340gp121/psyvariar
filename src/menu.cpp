@@ -1,7 +1,12 @@
 #include <iostream>
 #include <curses.h>
 #include <string>
+#include <vector>
+#include <algorithm>
 #include "menu.h"
+#include "game.h"
+#include "save.h"
+#include "globals.h"
 using namespace std;
 void menu::Menu(){
 
@@ -33,14 +38,14 @@ int menu::show_menu_get_input(){
     wprintw(win,"Please enter an integer from 1 to 4: ");
     refresh();
     wrefresh(win);
-	int n = mygetch() - '0', line;
-    line = 8;
-    while (n!=1 && n!=2 && n!=3 && n!=4 && n!=5){
+    int n = mygetch() - '0';
+    int line = 8;
+    while (n != 1 && n != 2 && n != 3 && n != 4){
         wmove(win,line,0);
-        wprintw(win,"Invalid input! Please enter an integer from 1 to 5: ");
-       refresh();
-		wrefresh(win);
-		n = mygetch() - '0';
+        wprintw(win,"Invalid input! Please enter an integer from 1 to 4: %d\n", n);
+        refresh();
+	    wrefresh(win);
+	    n = mygetch() - '0';
         line += 1;
     }
     refresh();
@@ -48,20 +53,6 @@ int menu::show_menu_get_input(){
     delwin(win);
     endwin();
     return n;
-}
-int menu::process_input(int n){
-    if (n == 1){
-        return 1;
-    }
-    else if (n == 2){
-        game_instructions();
-        return 2;
-    }
-    else if (n == 3){
-        print_rank_board();
-        return 2;
-    }
-    return 0;
 }
 int menu::change_difficulty_level(){
     initscr();
@@ -92,7 +83,7 @@ int menu::change_difficulty_level(){
     wrefresh(new_win);
     if (input1 == 'q'){
         delwin(new_win);
-        show_menu_get_input();
+        Menu_play();
     }
     else{
         wmove(new_win,line,0);
@@ -103,14 +94,14 @@ int menu::change_difficulty_level(){
         while (input2!=1 && input2!=2 && input2!=3){
             wmove(new_win,line+1,0);
             wprintw(new_win,"Invalid input! Please enter an integer from 1 to 3: ");
-            wrefresh(new_win);
+	    wrefresh(new_win);
             input2 = mygetch() - '0';
             line += 1;
         } 
         wrefresh(new_win);
         difficulty = input2;
         delwin(new_win);
-        show_menu_get_input();
+        Menu_play();
     }
     return difficulty;
 }
@@ -118,12 +109,13 @@ void menu::game_instructions(){
     initscr();
     WINDOW *new_win = newwin(50,150,0,0);
 //	keypad(stdscr, TRUE);
-	cbreak();
+    cbreak();
+    noecho();
     wmove(new_win,0,0);
     wprintw(new_win,"Game Instructions:");
     wmove(new_win,2,0);
     wprintw(new_win, "1. Introduction:\nWelcome to Psyvariar, a text-based game where you control a fighter plane and battle against waves of enemy planes. Your mission is to survive as long as possible.\n2. Controls:\nUse the arrow keys to move your plane up, down, left, and right. Press the spacebar to fire bullets at the enemy planes.\n3. Gameplay:\nThe game consists of 3 levels, each with increasing difficulty. During the game, you will face waves of enemy planes that will try to shoot you down.\nAlso be careful not to collide with any enemy planes or obstacles, as this will result in your plane being destroyed.\n4. Game Over:\nThe game will end when your plane is destroyed. Your final flying distance will be displayed, and you will have the option to play again.\n\nThat's it! We hope this helps you get started on your Plane War game. Good luck!");
-    wprintw(new_win, "Please input anything to return.");
+    wprintw(new_win, " Please input anything to return.");
     refresh();
     wrefresh(new_win);
     curs_set(0);
@@ -131,27 +123,108 @@ void menu::game_instructions(){
     curs_set(1);
     delwin(new_win);
     endwin();
-    show_menu_get_input();
+    Menu_play();
 }
 void menu::print_rank_board(){
-    
+    initscr();
+    WINDOW *new_win = newwin(50,150,0,0);
+    Save s;
+    vector<Save::record> records = s.read("rank_board.txt");
+    int line = 1;
+    wmove(new_win,0,0);
+    wprintw(new_win,"username   score   rank");
+    refresh();
+    wrefresh(new_win);
+    for (int i=0; i<min(int(records.size()), 10); ++i){
+        wmove(new_win,line,0);
+        const char* user_name = records[i].username.c_str();
+        wprintw(new_win, "%8s   %5d   %4d\n", user_name, records[i].score, i+1);
+        refresh();
+        wrefresh(new_win);
+        line++;
+    }
+    wmove(new_win,line+2,0);
+    wprintw(new_win,"Please input anything to quit the rank board.");
+    mygetch();
+    delwin(new_win);
+    Menu_play();
 }
-int menu::Menu_play(){
-    while(1){
-        int n = show_menu_get_input();
-        int x = process_input(n);
-        if (x == 1){
-            return 1;
+string menu::get_username(){
+    initscr();
+    WINDOW *new_win = newwin(50,150,0,0);
+//    cbreak();
+//    noecho();
+    wmove(new_win,0,0);
+    wprintw(new_win,"Please input your username (press \"enter\" when finished): ");
+    refresh();
+    wrefresh(new_win);
+    char* user_name = new char[100];
+    char* cur = user_name;
+    char x = 0;
+    while(x != -1 && x != 10){
+        x = mygetch();
+        if(x == 127){
+            cur --;
+            *cur = '\0';
         }
-        if (x == 0){
-            return 0;
+        else{
+            *cur = x;
+            cur++;
         }
+        wmove(new_win, 0, 0);
+        werase(new_win);
+        wprintw(new_win,"Please input your username (press \"enter\" when finished): %s", user_name);
+        refresh();
+        wrefresh(new_win);
+    }
+    wmove(new_win,1,0);
+    wprintw(new_win,"Your username is: ");
+    wprintw(new_win, "%s", user_name);
+    wmove(new_win,2,0);
+    wprintw(new_win,"Please press spacebar to enter the game menu. Enjoy!");
+    refresh();
+    wrefresh(new_win);
+    mygetch();
+    delwin(new_win);
+    string username_str(user_name);
+    delete[] user_name;
+    return username_str;
+}
+void menu::Menu_ending(int score){
+    initscr();
+    WINDOW *new_win = newwin(50,150,0,0);
+    wmove(new_win,0,0);
+    wprintw(new_win,"Game over! Your final score is: %d", score);
+    wmove(new_win,1,0);
+    wprintw(new_win,"Input \'p\' to see the ranking table");
+    refresh();
+    wrefresh(new_win);
+
+    while(mygetch() != 'p');
+    print_rank_board();
+    delwin(new_win);
+}
+void menu::Menu_play(){
+    int n = show_menu_get_input();
+    while (n != 4){
+        if (n == 1){
+            game g(0,30,100);
+            g.play();
+            int enemies_defeated = g.score_return();
+            int score = enemies_defeated*10;
+            Save s;
+            s.insert_rank("rank_board.txt", globle_username, score);
+            Menu_ending(score);
+        }
+        else if (n == 2){
+            game_instructions();
+        }
+        else if (n == 3){
+            print_rank_board();
+        }
+        n = show_menu_get_input();
     }
 }
-// void menu::Menu(){
-//     int x = Menu_play();
-//     if (x == 1){
-//     	game g(0, 30, 100);
-//         g.play();
-//     }
-// }
+void menu::Menu_init(){
+	globle_username = get_username();
+}
