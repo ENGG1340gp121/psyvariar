@@ -16,7 +16,7 @@ Save::Save(){
 bool operator < (const Save::record& a, const Save::record& b){
     return a.score > b.score;
 }
-
+// input file name, read the file and return a vector of records
 vector<Save::record> Save::read(string file){    
     vector<record> records;
     ifstream fin;
@@ -36,7 +36,7 @@ vector<Save::record> Save::read(string file){
     return records;
 }
 
-// insert the new score in the file 
+//input filename, username , and player's final score, insert the new score in the file 
 void Save::insert_rank(string file, string username, int score){
     ofstream fout;
     fout.open(file, ios::app);

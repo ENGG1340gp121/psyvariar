@@ -26,6 +26,7 @@ void System_message(WINDOW win){
 
 Board::Board(){}
 
+// This function input a mainwindow from game.cpp and the position of the board to initialize the board
 Board::Board(WINDOW* main_win, int _X, int _Y) {
     win = main_win;
     X = _X;
@@ -42,7 +43,7 @@ Board::Board(WINDOW* main_win, int _X, int _Y) {
 
 
 }
-
+//This function inputs a player and the number of enemies defeated to update the board
 void Board::board(Player player, int enemies_defeated){
     HP = player.HP;
     weapon = player.weapon;
@@ -60,6 +61,7 @@ void Board::board(Player player, int enemies_defeated){
     exploit_info();
 }
 
+// This function is designed to print the spaceship in the control board
 void Board::control_board(){
     wborder(win1,'|','|','--','--','+','+','+','+');
     wmove(win1,1,1);
@@ -69,7 +71,7 @@ void Board::control_board(){
     // system_message(win1);
 }
 
-
+//This function is to print the lower right board
 void Board::spaceship_info(){
     wborder(win2,'|','|','--','--','+','+','+','+');
     wmove(win2,1,3);
@@ -96,7 +98,7 @@ void Board::spaceship_info(){
     wprintw(win2,"%s","weapon durancy: ");
 
 }
-
+//This function is to print the rightmost board
 void Board::exploit_info(){// control the right board
     wborder(win3,'|','|','--','--','+','+','+','+');
     wmove(win3,1,3);
@@ -215,6 +217,7 @@ void Board::exploit_info(){// control the right board
     
 }
 
+//This function inputs a window and player's level and weapon code to draw the spaceship
 void Board::spaceship(WINDOW* win, int level, int weapon){// draw the image of spaceship according to it's level
     if (level>=0){
         wmove(win,10,14);
@@ -280,6 +283,7 @@ void Board::spaceship(WINDOW* win, int level, int weapon){// draw the image of s
     }
 }
 
+//This function inputs a window, control the spaceship's HP
 void Board::_HP(WINDOW* win){
     wmove(win,18,1);
     wprintw(win,"%s","<[HP: ");
