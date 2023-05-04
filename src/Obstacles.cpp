@@ -14,6 +14,7 @@ Obstacles::Obstacles(int _difficulty, int _LX, int _LY, int _RX, int _RY){
     rng = mt19937(time(0));
 }
 
+// add a new obstacle tmp to the vector
 void Obstacles::add_obstacle(Obstacle tmp){
     obstacles.push_back(tmp);
 }
@@ -29,6 +30,7 @@ void Obstacles::clear_obstacle(){
 }
 
 // Draw all obstacles
+// win is a pointer to the WINDOW object
 void Obstacles::draw(WINDOW* win){
     for(Obstacle& e: Obstacles::obstacles){
         e.draw(win);
@@ -44,6 +46,7 @@ void Obstacles::move() {
 }
 
 // Generate an obstacle that is to the right of the frame
+// returns the generated obstacle
 Obstacle Obstacles::generate_obstacle() {
     srand(time(NULL));
     int x = rng() % (RX - LX + 1 - 2) + LX;
@@ -73,6 +76,7 @@ int Obstacles::hit(int bx, int by) {
     return hit_flag;
 }
 
+// returns a vector that contains all the positions on the screen that is occupied by an obstacle
 vector<pair<int, int>> Obstacles::get_positions() {
     vector<pair<int, int>> ret;
     for(Obstacle& e : obstacles){

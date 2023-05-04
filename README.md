@@ -24,6 +24,7 @@
 We mainly use `curses.h` library.
 
 ## How to compile and run
+**Make sure the size of you terminal is at least 150 x 50 to display properly.**
 ### Step 1.
 ```bash
 cd src # Enter the ./src directory
