@@ -12,6 +12,7 @@ using namespace std;
 void menu::Menu(){
 
 }
+//This function converts the character input by the user to an integer.
 int mygetch() {
 	int res = -1;
 	while(res == -1) {
@@ -19,7 +20,8 @@ int mygetch() {
 	}
 	return res;
 }
-// show the menu and get the input from the user
+//This function prints the menu on the screen and asks the player to select an option.
+//This function returns the option number input by the player.
 int menu::show_menu_get_input(){
     initscr();
     WINDOW *win = newwin(50,150,0,0);
@@ -68,7 +70,8 @@ int menu::show_menu_get_input(){
     endwin();
     return n;
 }
-// show the menu of the game
+// This function prints the current difficulty level and enables the player to change the difficulty level.
+// return the difficulty player input
 int menu::change_difficulty_level(){
     initscr();
     WINDOW *new_win = newwin(50,150,0,0);
@@ -120,7 +123,7 @@ int menu::change_difficulty_level(){
     }
     return difficulty;
 }
-// display the intructions
+//This function prints the game handbook. Players can enter anything to return to the menu.
 void menu::game_instructions(){
     initscr();
     WINDOW *new_win = newwin(50,150,0,0);
@@ -139,9 +142,10 @@ void menu::game_instructions(){
     curs_set(1);
     delwin(new_win);
     endwin();
+    //Print the menu and get the user's input again.
     Menu_play();
 }
-// print the rank board
+//This function prints the usernames and the scores of top ten players. It is called "Rank Board". Players can enter anything to return. 
 void menu::print_rank_board(){
     initscr();
     WINDOW *new_win = newwin(50,150,0,0);
@@ -180,9 +184,11 @@ void menu::print_rank_board(){
     while(mygetch() != 'r');
     delwin(new_win);
     endwin();
+    //Print the menu and get the user's input again.
     Menu_play();
 }
-// get username
+//This function asks the user to input his/her username.
+//This function returns the username of the player.
 string menu::get_username(){
     initscr();
     WINDOW *new_win = newwin(50,150,0,0);
@@ -224,7 +230,7 @@ string menu::get_username(){
     delete[] user_name;
     return username_str;
 }
-// display the gameover 
+//This function shows the final score when game is over. Players are able to see the rank board.
 void menu::Menu_ending(int score){
     initscr();
     WINDOW *new_win = newwin(50,150,0,0);
@@ -239,7 +245,7 @@ void menu::Menu_ending(int score){
     print_rank_board();
     delwin(new_win);
 }
-// display the menu
+//This is the main function for menu.
 void menu::Menu_play(){
     int n = show_menu_get_input();
     while (n != 4){
@@ -261,7 +267,7 @@ void menu::Menu_play(){
         n = show_menu_get_input();
     }
 }
-// initialize the menu
+//This function converts the player's username to a global varaible so that it can be accessed in "Menu_play()" function.
 void menu::Menu_init(){
     globle_username = get_username();
 }
