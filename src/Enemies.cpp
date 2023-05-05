@@ -14,7 +14,7 @@ Enemies::Enemies(int _difficulty, int _LX, int _LY, int _RX, int _RY){
     difficulty = _difficulty;
     rng = mt19937(time(0));
 }
-// Add an enemy to the vector
+// Add an enemy tmp to the vector
 void Enemies::add_enemy(Enemy tmp){
     enemies.push_back(tmp);
 }
@@ -30,6 +30,7 @@ void Enemies::clear_enemy(){
 }
 
 // Draw all enemies
+// win is a pointer to the WINDOW object
 void Enemies::draw(WINDOW* win){
     vector<Enemy> tmp;
     for(Enemy& e: Enemies::enemies){
@@ -48,6 +49,7 @@ void Enemies::move() {
 }
 
 // Generate an enemy thet is that is to the right of the frame
+// returns the generated enemy
 Enemy Enemies::generate_enemy() {
     srand(time(NULL));
     int x = rng() % (RX - LX + 1 - 2) + LX;
@@ -101,6 +103,7 @@ void Enemies::shoot(int velocity) {
     }
 }
 
+// returns a vector that contains all the positions on the screen that is occupied by an enemy
 vector<pair<int, int>> Enemies::get_positions() {
     vector<pair<int, int>> ret;
     for(Enemy& e : enemies){

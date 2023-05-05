@@ -59,6 +59,7 @@ void Enemy::draw(WINDOW* win){
     }
 }
 
+// Decrease the HP by x
 void Enemy::decrease_HP(int x) {
     HP -= x;
 }
@@ -81,6 +82,7 @@ void Enemy::shoot(int velocity){
     }
 }
 
+// returns a vector that contains all positions on the screen that is occupied by the enemy
 vector<pair<int, int>> Enemy::get_positions() {
     vector<pair<int, int>> ret;
     for(Enemy_char& t : Enemy_figure[level]){
