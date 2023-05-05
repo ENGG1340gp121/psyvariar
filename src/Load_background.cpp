@@ -11,24 +11,24 @@ using namespace std;
 
 //constructor
 void load_background::play(){
-    initscr();  
-    cbreak();   
-    noecho();   
+    initscr();  //initialize ncurses
+    cbreak();   //keys interact directly without entering a carriage return
+    noecho();   //do not display the pointer
     refresh();  
     const int Width = 150;  
     const int Length = 50;  
-    WINDOW *main_Win=newwin(Length, Width, 0, 0); 
-    wrefresh(main_Win); 
-    start_win(main_Win);
-    probar(main_Win);
-    background_story(main_Win);
-    endwin();
-    delwin(main_Win);   
+    WINDOW *main_Win=newwin(Length, Width, 0, 0); //initialize the window with the length50 and width150, the pointer start at (0,0)
+    wrefresh(main_Win);     //refresh the window to get the images displayed on the window
+    start_win(main_Win);    //call the function below to print the start-game window
+    probar(main_Win);       //call the function below to print the loading bar
+    background_story(main_Win);     //call the function below to print the images and the related background story
+    endwin();   
+    delwin(main_Win);       //delete the window   
 }
 //print start-game window
 void load_background::start_win(WINDOW *main_Win){
-    box(main_Win, '.', '.');//窗口边框
-    wmove(main_Win, 20, 1);   //移动光标
+    box(main_Win, '.', '.');    //make the window borders
+    wmove(main_Win, 20, 1);     //move the pointer
     wprintw(main_Win, "%s", "        ______                                                                                                                                        ");  //窗口打印
     wmove(main_Win, 21, 1); 
     wprintw(main_Win, "%s", "  _____|\\     \\          _____   ______   _____ _______    ______    _____        ___________        ____________      _____        ___________       "); 
@@ -51,6 +51,7 @@ void load_background::start_win(WINDOW *main_Win){
     wmove(main_Win, 45, 53);
     wprintw(main_Win, "%s","<-------- Press Space To Continue -------->");
     wrefresh(main_Win);
+    //stop the window, when player press the spacethen continue
     while (true) {
         if (getch() == ' ') break;
     }
@@ -60,17 +61,18 @@ void load_background::probar(WINDOW *main_Win){
     wclear(main_Win);
     box(main_Win, '.', '.');
     wrefresh(main_Win);
-    int rate=0;
+    int rate=0; 
     char pro[102];
     memset(pro,'\0',sizeof(pro));
     const char* spin="-\\|/";
     wmove(main_Win,30,60);
     wprintw(main_Win, "%s", "<-------- Loading -------->");
     wmove(main_Win,25,5);
+    //make the time delayed loading bar
     while (rate <= 100){
         wprintw(main_Win, "[%-100s][%d%][%c]\r", pro, rate, spin[ rate%4]);
         pro[ rate++ ] = '=';
-        usleep(30000);
+        usleep(30000);  
         fflush(stdout);
         wrefresh(main_Win);
     }
@@ -153,7 +155,7 @@ void load_background::background_story(WINDOW *main_Win) {
         wmove(main_Win, 37, 10);
         wprintw(main_Win, "%s", "With the rapid development of human space technology");
         wrefresh(main_Win);
-        usleep(1200000);
+        usleep(1200000);    //wait for 1200000ns to do the next step
         wmove(main_Win, 39, 10);
         wprintw(main_Win, "%s", "Hope crystals are being developed and used by more and more scientists as a core energy source");
         wrefresh(main_Win);
