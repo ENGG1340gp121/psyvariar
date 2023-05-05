@@ -50,7 +50,7 @@ The game interface mainly consists of three parts.
 
 * **Dynamic memory management**
 
-  We use `std::vector` to maintain all the bullets and enemies inside the frame. When a sub-routine is finished, we use `vec.clear()` to release the memory. 
+  We use `std::vector` to maintain all the bullets and enemies inside the frame. `std::vector` can grow or shrink in size, which allows us to managing collections of objects whose size is not known beforehand and not waste memory.
 
 * **File input/output** 
 
