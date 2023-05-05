@@ -1,6 +1,6 @@
 # ENGG1340 Game : Psyvariar
 ## Team Members
-* Liu Che (3036030972)
+* Liu Che (3036030972), Github: [che330](https://github.com/che330)
 * Shi Boao (3035973787)
 * Fan Zhenyi (3035974054)
 * Mao Junkai (3035973696)
