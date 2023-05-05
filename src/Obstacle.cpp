@@ -28,7 +28,7 @@ Obstacle::Obstacle(int _difficulty, int _x, int _y, int _level, int _LX, int _LY
 
 // Returns whether the Obstacle is alive
 // The Obstacle is dead if it will never appear in frame
-bool Obstacle::alive() {
+bool Obstacle::alive(){
     for(Obstacle_char& c : Obstacle_figure[level]){
         int X = x + c.x, Y = y + c.y;
         if(LX <= X && X <= RX && Y >= LY)

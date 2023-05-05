@@ -109,7 +109,7 @@ int menu::change_difficulty_level(){
         while (input2!=1 && input2!=2 && input2!=3){
             wmove(new_win,line+1,0);
             wprintw(new_win,"Invalid input! Please enter an integer from 1 to 3: ");
-	    wrefresh(new_win);
+	        wrefresh(new_win);
             input2 = mygetch() - '0';
             line += 1;
         } 
@@ -263,5 +263,5 @@ void menu::Menu_play(){
 }
 // initialize the menu
 void menu::Menu_init(){
-	globle_username = get_username();
+    globle_username = get_username();
 }
