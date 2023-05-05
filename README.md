@@ -1,7 +1,11 @@
 # ENGG1340 Game : Psyvariar
 ## Team Members
-* Liu Che (3036030972), Github: [che330](https://github.com/che330)
+* Liu Che (3036030972)
+  * Github: [che330](https://github.com/che330)
+
 * Shi Boao (3035973787)
+  * Github: [aoibosh](https://github.com/aoibosh)
+
 * Fan Zhenyi (3035974054)
 * Mao Junkai (3035973696)
 * Sang Ziheng (3035974638)
@@ -54,11 +58,7 @@ The game interface mainly consists of three parts.
 
 * **Program codes in multiple files**
 
-  We set different `.cpp` and `.h` files to deal with specific `class`. Each `class` can be used in different programs, making it efficient.
-
-  **Proper indentation and naming styles**
-
-  Our program code is splitted into multuple files based on class. (Program codes in multiple files)
+  We set different `.cpp` and `.h` files to deal with specific `class`. Each `class` can be used in different programs, making it efficient. Our program code is split into multiple files based on class.
 
 * **Proper indentation and naming styles**
 
@@ -78,14 +78,21 @@ The game interface mainly consists of three parts.
 
 * **In-code documentation**
 
+  "what it does", "what the inputs are", "what the outputs are" are satisfied.
+  
   ```c++
-  //This is the function to move the player's plane according to the input
-  
-  // game.cpp is used to control the game
-  
-  // the function of the game is defined as a vector of plane_char
-  
-  //Obstacles.cpp is used to generate the obstacles and draw them on the screen
+  // this function is used to initialize the bullet
+  // _x, _y are the initially coordinate of bullet
+  // _LX, _LY, _RX, _RY are the screen size
+  // _sym is the symbol of figure
+  Bullet::Bullet(int _x, int _y, int _LX, int _LY, int _RX, int _RY, char _sym)
+  // this function is used to move the bullet for one unit
+  // velocity is bullet's moving velocity
+  // direction means bullet moves from left or right
+  void Bullet::move(int velocity, int direction)
+  // Generate an enemy thet is that is to the right of the frame
+  // returns the generated enemy
+  Enemy Enemies::generate_enemy()
   ```
 
 ## Libraries
@@ -106,3 +113,8 @@ make main # Compile and create ./main
 ```bash
 ./main # run the program
 ```
+
+```shell
+./main 1 # if you want to skip the Loading_Background, add anything behind ./main to skip
+```
+
