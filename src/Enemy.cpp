@@ -9,6 +9,12 @@ using namespace std;
 Enemy::Enemy(){
     clock = 0;
 }
+// initiate the enemies
+// _x, _y is the spawn coordinate of enemy
+// _level is the level of this enemy
+// _difficulty is to set the difficulty
+// _LX, _LY, _RX, _RY are the screen size
+// _HP is the health point of enemy
 Enemy::Enemy(int _difficulty, int _x, int _y, int _level, int _LX, int _LY, int _RX, int _RY, int _HP){
     Enemy_figure[0].push_back(Enemy_char('<', 0, 2));
     Enemy_figure[0].push_back(Enemy_char('<', 1, 0));
@@ -25,7 +31,7 @@ Enemy::Enemy(int _difficulty, int _x, int _y, int _level, int _LX, int _LY, int 
 
 // Returns whether the enemy is alive
 // The enemy is dead if HP <= 0 or will never appear in frame
-bool Enemy::alive() {
+bool Enemy::alive(){
     if(HP <= 0) return false;
     for(Enemy_char& c : Enemy_figure[level]){
         int X = x + c.x, Y = y + c.y;

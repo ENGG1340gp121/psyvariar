@@ -15,6 +15,8 @@ using namespace std;
 game::game(){
 
 }
+// setting game's difficulty
+// set the map size X_size, Y_size
 game::game(int difficulty, int X_size,int Y_size){
 	TIME_OUT = 20;
 	MIN_ENEMIES = 10;

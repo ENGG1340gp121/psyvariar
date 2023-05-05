@@ -9,6 +9,9 @@
 //Enemies.cpp is used to generate the enemies and draw them on the screen
 //This is the constructor of the enemy
 Enemies::Enemies(){}
+// initiate the enemies
+// _difficulty is to set the difficulty
+// _LX, _LY, _RX, _RY are the screen size
 Enemies::Enemies(int _difficulty, int _LX, int _LY, int _RX, int _RY){
 	LX = _LX, LY = _LY, RX = _RX, RY = _RY;
     difficulty = _difficulty;

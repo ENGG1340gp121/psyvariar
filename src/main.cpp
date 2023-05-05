@@ -10,6 +10,7 @@
 using namespace std;
 int main(int argc, char *argv[]){
 	load_background load;
+	// if argc == 1, play the background. otherwise skip it
 	if(argc == 1) load.play();
 	menu *M = new menu;
 	M->Menu_init();
