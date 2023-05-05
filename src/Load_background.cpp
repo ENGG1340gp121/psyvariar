@@ -27,8 +27,8 @@ void load_background::play(){
 }
 //print start-game window
 void load_background::start_win(WINDOW *main_Win){
-    box(main_Win, '.', '.');//窗口边框
-    wmove(main_Win, 20, 1);   //移动光标
+    box(main_Win, '.', '.');    //make the window borders
+    wmove(main_Win, 20, 1);     //move the pointer
     wprintw(main_Win, "%s", "        ______                                                                                                                                        ");  //窗口打印
     wmove(main_Win, 21, 1); 
     wprintw(main_Win, "%s", "  _____|\\     \\          _____   ______   _____ _______    ______    _____        ___________        ____________      _____        ___________       "); 
